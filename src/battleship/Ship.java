@@ -25,11 +25,40 @@ public class Ship {
         startX = gen.nextInt(10);
         startY = gen.nextInt(10);
         int dir = gen.nextInt(4);
-        
+        int i = 1;
+        while(i){
         //Go North
         if(dir==0){
+            if(startY-(size-1) >= 0){
             endX = startX;
             endY = startY-(size-1);
+            i = 0;
+            }
+            else{
+                dir++;
+            }
+        }
+        
+        //Go East
+        if(dir==1){
+            if(startX + (size-1) <= 9){
+                endX = startX + (size-1);
+                endY = startY;
+                i = 0;
+            }
+            else{
+                dir++;
+            }
+        }
+        
+        //Go South
+        if(dir==2){
+            endX = startX;
+            endY = startY+(size-1);
+        }
+        
+        //Go West
+        if(dir)
         }
     }
     
