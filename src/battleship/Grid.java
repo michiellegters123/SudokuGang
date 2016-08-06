@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pg3f4battleship;
+package battleship;
 
 import java.util.ArrayList;
 import javafx.scene.Node;
@@ -44,7 +44,6 @@ public abstract class Grid {
         if (mode == 1) {
             if (!this.isValid(ship.getStartX(), ship.getStartY(), ship.getSize(), isRotated)) {
                 return;
-            } else {
             }
         }
         for (int x = ship.getStartX(); x <= ship.getEndX(); x++) {
@@ -129,18 +128,18 @@ public abstract class Grid {
                 }
 
                 //If PC is guessing, provide feedback to the AI
-                if (board.equals(mode == 1)) {   //if PC is guessing AND ship is destroyed
+                if (mode == 1) {   //if PC is guessing AND ship is destroyed
                     ai.feedback(true, true);
                 }
             } else {
-                if (board.equals(mode == 1)) {   //if PC is guessing and ship is hit but not destroyed
+                if (mode == 1) {   //if PC is guessing and ship is hit but not destroyed
                     ai.feedback(true, false);
                 }
             }
         } else {    //If PC is guessing and ship is not hit and not destroyed
             r.setFill(Color.WHITE);
             r.setStroke(Color.BLACK);
-            if (board.equals(mode == 1)) {
+            if (mode == 1) {
                 ai.feedback(false, false);
             }
         }
@@ -207,6 +206,27 @@ public abstract class Grid {
             }
         }
 
+        return true;
+    }
+
+    boolean shipOnSpace(int x, int y, int size, boolean isRotated) {
+        if (isRotated) {
+            for (int i = 0; i < size && i <= 9; i++) {
+                Node n = this.getNode(x, y + i);
+                Rectangle r = (Rectangle) n;
+                if (r.getFill().equals(Color.GREEN)) //Already occupied
+                    return false;
+            }
+        }
+
+        if (!isRotated) {
+            for (int i = 0; i < size && i <= 9; i++) {
+                Node n = this.getNode(x + i, y);
+                Rectangle r = (Rectangle) n;
+                if (r.getFill().equals(Color.GREEN)) //Already occupied
+                    return false;
+            }
+        }
         return true;
     }
     

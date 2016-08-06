@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pg3f4battleship;
+package battleship;
 
 import java.util.Random;
 import java.util.Stack;
@@ -17,7 +17,7 @@ public class AI {
     private int lastX = 0;
     private int lastY = 0;
     private int x = 0;
-    private int y = 9;
+    private int y = 0;
     private boolean lastGuessHit = false;
     private Stack stack = new Stack();
     private Random gen = new Random();
@@ -27,6 +27,20 @@ public class AI {
      *
      */
     public AI() {
+        this.generate();
+    }
+
+    void reset() {
+        startSearchX = 0;
+        startSearchY = 0;
+        lastX = 0;
+        lastY = 0;
+        x = 0;
+        y = 0;
+        lastGuessHit = false;
+        stack.empty();
+        lastDir = 0;
+        generate();
     }
 
     /**
@@ -59,8 +73,7 @@ public class AI {
      *  If hit, search nearby spots for remainder of ship until a ship is destroyed or out of places to search
      *  Repeat
      */
-    public void generate() {
-
+    void generate() {
         //If no boat found yet, pick random coordinate
         if (!lastGuessHit && stack.isEmpty()) {
             x = gen.nextInt(10);
@@ -70,7 +83,6 @@ public class AI {
 
         //If miss space during adjacent space search
         if (!lastGuessHit && !stack.isEmpty()) {
-            //Not the most intuitive thing in the world, but it works
             lastX = startSearchX;
             x = lastX;
             lastY = startSearchY;
@@ -87,10 +99,10 @@ public class AI {
         if (lastGuessHit && stack.isEmpty()) {
             //Pick random dir
             int dir = gen.nextInt(4);
-            int i = 4;
             startSearchX = lastX;
             startSearchY = lastY;
             //Add all dirs to stack in random order
+            int i = 4;
             while (i > 0) {
                 stack.push(dir);
                 dir++;
@@ -109,9 +121,9 @@ public class AI {
 
 
     /**
-     *While there are still queued directions to search AND we can't move in current direction,
-     *make current direction = next queued direction
-     *If no more queued directions, generate random coordinates
+     * While there are still queued directions to search AND we can't move in current direction,
+     * make current direction = next queued direction
+     * If no more queued directions, generate random coordinates
      */
         public void tryToMove() {
         int dir = (int) stack.pop();
@@ -185,7 +197,7 @@ public class AI {
      * @param getHit whether or not last guess hit
      * @param getDestroy whether or not last guess destroyed a ship
      */
-    public void feedback(boolean getHit, boolean getDestroy) {
+    void feedback(boolean getHit, boolean getDestroy) {
         if (getDestroy) {
             stack.clear();
             lastX = 0;
@@ -222,8 +234,21 @@ public class AI {
             }
             return;
         }
-        if (!getHit) {
+        else {
             lastGuessHit = false;
         }
+    }
+
+    void printCurrentData(){
+        System.out.println("X: " + x);
+        System.out.println("Y: " + y);
+        System.out.println("Last Guess Hit: " + lastGuessHit);
+        System.out.println("StartSearchX: " + startSearchX);
+        System.out.println("StartSearchY: " + startSearchY);
+        System.out.println("LastX: " + lastX);
+        System.out.println("LastY: " + lastY);
+        System.out.println("LastDir: " + lastDir);
+        System.out.println("Stack: " + stack);
+        System.out.println("---------------------------------");
     }
 }

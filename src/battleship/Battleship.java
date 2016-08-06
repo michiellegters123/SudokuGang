@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pg3f4battleship;
+package battleship;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 /**
  * @author pg3f4
  */
-public class Pg3f4Battleship extends Application {
+public class Battleship extends Application {
 
     /**
      * @param args the command line arguments

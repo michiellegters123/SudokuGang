@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pg3f4battleship;
+package battleship;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -13,6 +13,7 @@ import java.util.Random;
  */
 public class Ship {
 
+    private boolean isSet = false;
     private int size;
     private int startX;
     private int startY;
@@ -93,6 +94,14 @@ public class Ship {
      */
     public void setStartY(int startY) {
         this.startY = startY;
+    }
+
+    public void setIsSet(boolean isSet) {
+        this.isSet = isSet;
+    }
+
+    public boolean getIsSet() {
+        return isSet;
     }
 
     /**

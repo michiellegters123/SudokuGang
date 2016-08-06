@@ -13,6 +13,6 @@
   <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="Battleship" >
     <param name="requiredFXVersion" value="8.0+"/>
   </applet-desc>
-  <jfx:javafx-desc  width="800" height="600" main-class="pg3f4battleship.Pg3f4Battleship"  name="Battleship" />
+  <jfx:javafx-desc width="800" height="600" main-class="pg3f4battleship.Battleship" name="Battleship" />
   <update check="always"/>
 </jnlp>

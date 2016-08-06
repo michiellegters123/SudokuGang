@@ -1,4 +1,4 @@
-package pg3f4battleship;
+package battleship;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -15,6 +15,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -72,6 +73,7 @@ public class BattleshipController implements Initializable {
 
     /**
      * Initializes the controller class.
+     *
      * @param url
      * @param rb
      */
@@ -80,7 +82,7 @@ public class BattleshipController implements Initializable {
         Alert startAlert = new Alert(AlertType.INFORMATION);
         startAlert.setTitle("Welcome");
         startAlert.setHeaderText(null);
-        startAlert.setContentText("Welcome to Battleship\nPlease start by placing your ships.\n(Click to rotate, drag to place)");
+        startAlert.setContentText("Welcome to Battleship\nPlease start by placing your ships on the BOTTOM board.\n(Click to rotate, drag to place)");
         startAlert.showAndWait();
         playerGrid = new PlayerGrid(playerDisplayBoard);
         pcGrid = new PCGrid(pcDisplayBoard);
@@ -99,7 +101,7 @@ public class BattleshipController implements Initializable {
         pcGrid.initGrid();
         playerGrid.initGrid();
         installPlayerBoardListeners(playerGrid);
-        
+
         //Set-up boats, place them in the right spot
         installBoatListeners(boat1);
         boat1.setLayoutX(30);
@@ -140,11 +142,18 @@ public class BattleshipController implements Initializable {
         boat8.setLayoutX(30);
         boat8.setLayoutY(550);
         boat8.setRotate(0);
+
+        for (Node node : pcDisplayBoard.getChildren()) {
+            Rectangle rect = (Rectangle) node;
+            rect.setDisable(true);
+        }
+
+        ai.reset();
     }
 
     /**
      * Install listeners on rectangles to install drag/drop, interact with displayBoard, etc.
-     * 
+     *
      * @param boat the Shape that the boat listeners are being installed on
      */
     private void installBoatListeners(Node boat) {
@@ -158,6 +167,11 @@ public class BattleshipController implements Initializable {
                 needToRotate = true;
                 Rectangle rect = (Rectangle) boat;
                 select(rect);
+                if (boat.rotateProperty().getValue() == 0) {
+                    isRotated = false;
+                } else {
+                    isRotated = true;
+                }
                 double localX = boat.getLayoutX() - 225;
                 double localY = boat.getLayoutY() - 334;
                 if (isRotated) {
@@ -173,7 +187,29 @@ public class BattleshipController implements Initializable {
                         removeShip = ship;
                         for (int x2 = removeShip.getStartX(); x2 <= removeShip.getEndX(); x2++) {
                             for (int y2 = removeShip.getStartY(); y2 <= removeShip.getEndY(); y2++) {
-                               playerGrid.gameBoard.get(x2).get(y2).setShip(null);
+                                playerGrid.gameBoard.get(x2).get(y2).setShip(null);
+                            }
+                        }
+                        if (removeShip != null) {
+                            if (removeShip.getIsSet()) {
+                                if (!isRotated) {
+                                    if (playerDisplayBoard.contains(localX, localY)) {
+                                        for (int i = 0; i < size && i <= 9 - x; i++) {
+                                            Rectangle r = (Rectangle) playerGrid.getNode(x + i, y);
+                                            r.setFill(Color.BLACK);
+                                        }
+
+                                    }
+                                }
+                                if (isRotated) {
+                                    if (playerDisplayBoard.contains(localX, localY)) {
+                                        for (int i = 0; i < size && i <= 9 - y; i++) {
+                                            Rectangle r = (Rectangle) playerGrid.getNode(x, y + i);
+                                            r.setFill(Color.BLACK);
+                                        }
+
+                                    }
+                                }
                             }
                         }
                     }
@@ -181,28 +217,6 @@ public class BattleshipController implements Initializable {
 
                 if (playerGrid.ships.remove(removeShip)) {
                     startButton.disableProperty().set(true);
-                }
-
-                if (!isRotated) {
-                    if (playerDisplayBoard.contains(localX, localY)) {
-                        for (int i = 0; i < size && i <= 9-x; i++) {
-                            Rectangle r = (Rectangle) playerGrid.getNode(x + i, y);
-                            r.setFill(Color.BLACK);
-                        }
-
-                    }
-                }
-                if (isRotated) {
-
-                    if (playerDisplayBoard.contains(localX, localY)) {
-
-
-                        for (int i = 0; i < size && i <= 9-y; i++) {
-                            Rectangle r = (Rectangle) playerGrid.getNode(x, y + i);
-                            r.setFill(Color.BLACK);
-                        }
-
-                    }
                 }
                 boat.setCursor(Cursor.MOVE);
             }
@@ -256,7 +270,6 @@ public class BattleshipController implements Initializable {
             }
 
         });
-        return;
     }
 
     /**
@@ -285,8 +298,9 @@ public class BattleshipController implements Initializable {
                         Alert winAlert = new Alert(AlertType.INFORMATION);
                         winAlert.setTitle("VICTORY");
                         winAlert.setHeaderText(null);
-                        winAlert.setContentText("You Win!\nResetting. . .");
+                        winAlert.setContentText("You Win!\nThanks for playing!");
                         winAlert.showAndWait();
+                        System.exit(0);
                         reset();
                     } else {
                         //PC Takes turn
@@ -306,13 +320,14 @@ public class BattleshipController implements Initializable {
                             y = ai.nextY();
                         }
                         playerGrid.guess(x, y, ai);
-                        if (grid.checkWin()) {
+                        if (playerGrid.checkWin()) {
                             Alert loseAlert = new Alert(AlertType.INFORMATION);
                             loseAlert.setTitle("DEFEAT");
                             loseAlert.setHeaderText(null);
-                            loseAlert.setContentText("You Lose.\nResetting. . .");
+                            loseAlert.setContentText("You Lose.\nThanks for playing!");
                             loseAlert.showAndWait();
-                            reset();
+                            //reset();
+                            System.exit(0);
                         }
                     }
                 }
@@ -374,19 +389,21 @@ public class BattleshipController implements Initializable {
                             if (grid.isValid(x, y, size, isRotated)) {
                                 col = Color.GREEN;
                                 playerGrid.ships.add(ship);
+                                ship.setIsSet(true);
                                 if (playerGrid.ships.size() == 8)
                                     startButton.disableProperty().set(false);
-                            } else col = Color.RED;
-                            for (int i = 0; i < size && i < 9; i++) {
-                                if (isRotated) {
-                                    if (y + i <= 9)
-                                        r = (Rectangle) playerGrid.getNode(x, y + i);
 
-                                } else {
-                                    if (x + i <= 9)
-                                        r = (Rectangle) playerGrid.getNode(x + i, y);
+                                for (int i = 0; i < size && i < 9; i++) {
+                                    if (isRotated) {
+                                        if (y + i <= 9)
+                                            r = (Rectangle) playerGrid.getNode(x, y + i);
+
+                                    } else {
+                                        if (x + i <= 9)
+                                            r = (Rectangle) playerGrid.getNode(x + i, y);
+                                    }
+                                    r.setFill(col);
                                 }
-                                r.setFill(col);
                             }
 
                         }
@@ -402,10 +419,9 @@ public class BattleshipController implements Initializable {
     }
 
 
-
     /**
      * Displays information about the application
-     * 
+     *
      * @param event the action of pressing the button
      */
     @FXML
@@ -419,9 +435,9 @@ public class BattleshipController implements Initializable {
 
     /**
      * Highlights a boat
-     * 
+     *
      * @param boat the boat to select
-     * @return 
+     * @return
      */
     private Rectangle select(Rectangle boat) {
         selectedShip.setStroke(Color.WHITE);
@@ -436,8 +452,8 @@ public class BattleshipController implements Initializable {
 
     /**
      * Changes application from set-up state to game state
-     * 
-     * @param event 
+     *
+     * @param event
      */
     @FXML
     private void startGame(ActionEvent event) {
@@ -446,10 +462,10 @@ public class BattleshipController implements Initializable {
         startAlert.setHeaderText(null);
         startAlert.setContentText("Good job!\nYou go first!\nSelect the spot on the top board you wish to guess.");
         startAlert.showAndWait();
-        
+
         //Deselect boat
         select(null);
-        
+
         //Change color of all spaces in player Display board to black
         for (int x = 0; x <= 9; x++) {
             for (int y = 0; y <= 9; y++) {
@@ -467,11 +483,11 @@ public class BattleshipController implements Initializable {
         }
         anchor.setOnMouseReleased(null);
         anchor.setOnMouseDragged(null);
-        
+
         //Get PC grid ready
         pcGrid.initGrid();
         installPCBoardListeners(pcGrid);
-        
+
         startButton.disableProperty().set(true);
 
     }
