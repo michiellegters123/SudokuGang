@@ -1,5 +1,7 @@
 # Battleship
-Battleship Made With JavaFX
+Battleship Clone Made With Java
+
+![Battleship Picture](http://www.pipcodes.com/pics/battleship.PNG "Gameplay")
 
 To Use: Run dist/Battleship.jar
 
