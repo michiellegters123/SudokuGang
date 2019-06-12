@@ -164,8 +164,6 @@ public class Rebus
                 new InterFace(root);
                 dialog.setScene(scene);
                 dialog.show();
-                
-                Scrum s = new Scrum();
             }
             else
             {
