@@ -88,7 +88,7 @@ public class InterFace implements Interface.Sluiten
                 GridPane root = new GridPane();
                 Stage dialog = new Stage();
                 dialog.initModality(Modality.APPLICATION_MODAL);
-                dialog.setTitle("Los de alfabetische puzzel op om het woord te krijgen!");
+                dialog.setTitle("Los de alfabetische puzzel op om het woord te krijgen! LET OP: je hebt niet alles nodig");
                 dialog.initOwner(primaryStage);
                 Scene scene = new Scene(root, 580, 300);
                 
