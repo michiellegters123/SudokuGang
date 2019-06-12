@@ -14,13 +14,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 
-/**
- *
- * @author michi
- */
-
-
-
 public class InterFace
 {
     private final Button land1, land2, land3, land4, land5, land6, land7, land8, enter;
@@ -59,8 +52,7 @@ public class InterFace
         enter = new Button("Invoeren");
         
         enter.setOnAction(event->
-        {
-            
+        {   
             if(uitkomst.getText().equals("kombuis"))
             {
                 Alert alert = new Alert(AlertType.INFORMATION);
@@ -78,11 +70,11 @@ public class InterFace
                 alert.showAndWait();
             }
         });
+        
         land1.setOnAction(event ->
         {
             System.out.println("het werkt");
         });
-        
         
         land1.setMaxWidth(275);
         land1.setMaxHeight(275);
@@ -188,8 +180,6 @@ public class InterFace
             alert.showAndWait();
         });
         
-        
-        
         p.add(land1, 0, 0);
         p.add(land2, 1, 0);
         p.add(land3, 2, 0);
@@ -201,9 +191,6 @@ public class InterFace
         p.add(uitleg,1,3, 2, 2);
         p.add(uitkomst,1,5);
         p.add(enter,2,5);
-         
-        
-        
     }
 
 }
