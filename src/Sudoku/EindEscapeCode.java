@@ -23,7 +23,7 @@ public class EindEscapeCode extends Application {
         new GUI(root);
         Scene scene = new Scene(root, 385, 250);
 
-        primaryStage.setTitle("Hello World!");
+        primaryStage.setTitle("Sudoku");
         primaryStage.setScene(scene);
         primaryStage.show();
     }

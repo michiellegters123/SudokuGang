@@ -9,7 +9,6 @@ package Rebus;
 
 
 import Game.InterFace;
-import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -159,15 +158,14 @@ public class Rebus
                 Stage dialog = new Stage();
                 dialog.initModality(Modality.APPLICATION_MODAL);
                 dialog.setTitle("hier komt de title van de puzzle");
-                // Defines a modal window that blocks events from being
-                // delivered to any other application window.
                 dialog.initOwner(primaryStage);
                 Scene scene = new Scene(root, 900, 940);
                 
                 new InterFace(root);
                 dialog.setScene(scene);
                 dialog.show();
-   
+                
+                Scrum s = new Scrum();
             }
             else
             {

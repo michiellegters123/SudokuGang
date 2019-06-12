@@ -53,10 +53,8 @@ public class InterFace
         
         foto8 = new ImageView("img/Österreich.png");
         land8 = new Button("", foto8);
-        
-<<<<<<< HEAD
-        uitleg = new Label("Pak van elk ingekleurde gebied de eerste letter en vorm een woord" + "\r\n" + "Klik op het land voor de volgorde" + "\r\n" + "Je hebt niet bij elk land een hint");
-        uitleg.setMaxWidth(275);
+
+        uitleg = new Label("Pak van elk ingekleurde gebied de eerste letter en vorm een woord" + "\r\n" + "Klik op het land voor de volgorde. Je hebt niet bij elk land een hint");
         uitkomst = new TextField("Uw antwoord");
         enter = new Button("Invoeren");
         
@@ -79,10 +77,10 @@ public class InterFace
                 alert.setContentText("Je hebt het antwoord niet correct");
                 alert.showAndWait();
             }
-=======
-        land1.setOnAction(event ->{
+        });
+        land1.setOnAction(event ->
+        {
             System.out.println("het werkt");
->>>>>>> dea2d48df368e754f3b91e9dda1eb6eb6517ffd3
         });
         
         
@@ -200,9 +198,9 @@ public class InterFace
         p.add(land6, 2, 1);
         p.add(land7, 0, 2);
         p.add(land4, 1, 2, 2, 1);
-        p.add(uitleg,1,3);
-        p.add(uitkomst,1,4);
-        p.add(enter,2,4);
+        p.add(uitleg,1,3, 2, 2);
+        p.add(uitkomst,1,5);
+        p.add(enter,2,5);
          
         
         
