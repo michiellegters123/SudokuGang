@@ -54,6 +54,7 @@ public class InterFace
         foto8 = new ImageView("img/Österreich.png");
         land8 = new Button("", foto8);
         
+<<<<<<< HEAD
         uitleg = new Label("Pak van elk ingekleurde gebied de eerste letter en vorm een woord" + "\r\n" + "Klik op het land voor de volgorde" + "\r\n" + "Je hebt niet bij elk land een hint");
         uitleg.setMaxWidth(275);
         uitkomst = new TextField("Uw antwoord");
@@ -78,6 +79,10 @@ public class InterFace
                 alert.setContentText("Je hebt het antwoord niet correct");
                 alert.showAndWait();
             }
+=======
+        land1.setOnAction(event ->{
+            System.out.println("het werkt");
+>>>>>>> dea2d48df368e754f3b91e9dda1eb6eb6517ffd3
         });
         
         
