@@ -8,7 +8,11 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
+<<<<<<< HEAD
+    <jar href="GameInterFace.jar" size="131836" download="eager" />
+=======
     <jar href="GameInterFace.jar" size="222471" download="eager" />
+>>>>>>> dea2d48df368e754f3b91e9dda1eb6eb6517ffd3
   </resources>
   <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="GameInterFace" >
     <param name="requiredFXVersion" value="8.0+"/>

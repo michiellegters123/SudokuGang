@@ -11,6 +11,7 @@ import javafx.stage.Stage;
  */
 public class Scrum extends Application 
 {
+    private boolean stop = false;
 
     @Override
     public void start(Stage primaryStage) 
@@ -26,6 +27,11 @@ public class Scrum extends Application
         primaryStage.setScene(scene);
         primaryStage.show();
         primaryStage.setMaximized(true);
+    }
+    
+    public void stopProgram()
+    {
+        this.stop = true;
     }
 
     /**

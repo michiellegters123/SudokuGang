@@ -15,7 +15,7 @@ public class GameInterFace extends Application
     public void start(Stage primaryStage) 
     {
         GridPane root = new GridPane();
-        Scene scene = new Scene(root, 900, 940);
+        Scene scene = new Scene(root, 900, 960);
 
         new InterFace(root);
 
