@@ -1,28 +1,31 @@
-package Game;
+package Rebus;
 
+import Game.InterFace;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 /**
  * "Aan de slag met Java en JavaFX" opstartklasse
- * @author michi
+ * @author jiand
  */
-public class GameInterFace extends Application 
+public class Scrum extends Application 
 {
 
     @Override
     public void start(Stage primaryStage) 
     {
         GridPane root = new GridPane();
-        Scene scene = new Scene(root, 900, 940);
+        Scene scene = new Scene(root, 300, 250);
 
-        new InterFace(root);
+        // start here new Gui
+        new Rebus(root);
 
 
-        primaryStage.setTitle("Game");
+        primaryStage.setTitle("Los alle rebussen op voor het code woord");
         primaryStage.setScene(scene);
         primaryStage.show();
+        primaryStage.setMaximized(true);
     }
 
     /**

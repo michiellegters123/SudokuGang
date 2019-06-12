@@ -49,6 +49,10 @@ public class InterFace
         foto8 = new ImageView("img/Österreich.png");
         land8 = new Button("", foto8);
         
+        land1.setOnAction(event ->{
+            System.out.println("het werkt");
+        });
+        
         
         land1.setMaxWidth(275);
         land1.setMaxHeight(275);
