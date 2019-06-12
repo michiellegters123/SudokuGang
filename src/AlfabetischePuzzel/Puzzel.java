@@ -53,7 +53,7 @@ public class Puzzel
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Correct");
                 alert.setHeaderText("Gefeliciteerd");
-                alert.setContentText("De sleutel is ****");
+                alert.setContentText("De sleutel is: krijg a**s");
                 alert.showAndWait();
             }
             else

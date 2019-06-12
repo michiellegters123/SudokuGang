@@ -5,6 +5,8 @@
  */
 package Game;
 
+import AlfabetischePuzzel.Puzzel;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.GridPane;
@@ -12,6 +14,8 @@ import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 
 public class InterFace
@@ -20,6 +24,7 @@ public class InterFace
     private final ImageView foto1, foto2, foto3, foto4, foto5, foto6, foto7, foto8;
     private final Label uitleg;
     private final TextField uitkomst;
+    Stage primaryStage;
     
     public InterFace(GridPane p)
     {
@@ -48,18 +53,48 @@ public class InterFace
         land8 = new Button("", foto8);
 
         uitleg = new Label("Pak van elk ingekleurde gebied de eerste letter en vorm een woord" + "\r\n" + "Klik op het land voor de volgorde. Je hebt niet bij elk land een hint");
-        uitkomst = new TextField("Uw antwoord");
+        uitkomst = new TextField();
+        uitkomst.setPromptText("Uw antwoord");
         enter = new Button("Invoeren");
         
         enter.setOnAction(event->
         {   
             if(uitkomst.getText().equals("kombuis"))
+            {                
+                GridPane root = new GridPane();
+                Stage dialog = new Stage();
+                dialog.initModality(Modality.APPLICATION_MODAL);
+                dialog.setTitle("Los de alfabetische puzzel op om het woord te krijgen!");
+                dialog.initOwner(primaryStage);
+                Scene scene = new Scene(root, 580, 300);
+                
+                new Puzzel(root);
+                dialog.setScene(scene);
+                dialog.show();
+            }
+            else
             {
                 Alert alert = new Alert(AlertType.INFORMATION);
-                alert.setTitle("Correct");
-                alert.setHeaderText("Gefeliciteerd");
-                alert.setContentText("De sleutel is ****");
+                alert.setTitle("Fout");
+                alert.setHeaderText("Helaas");
+                alert.setContentText("Je hebt het antwoord niet correct");
                 alert.showAndWait();
+            }
+        });
+        uitkomst.setOnAction(event->
+        {
+            if(uitkomst.getText().equals("kombuis"))
+            {                
+                GridPane root = new GridPane();
+                Stage dialog = new Stage();
+                dialog.initModality(Modality.APPLICATION_MODAL);
+                dialog.setTitle("Los de alfabetische puzzel op om het woord te krijgen!");
+                dialog.initOwner(primaryStage);
+                Scene scene = new Scene(root, 580, 300);
+                
+                new Puzzel(root);
+                dialog.setScene(scene);
+                dialog.show();
             }
             else
             {

@@ -157,7 +157,7 @@ public class Rebus
                 GridPane root = new GridPane();
                 Stage dialog = new Stage();
                 dialog.initModality(Modality.APPLICATION_MODAL);
-                dialog.setTitle("hier komt de title van de puzzle");
+                dialog.setTitle("Landen puzzel");
                 dialog.initOwner(primaryStage);
                 Scene scene = new Scene(root, 900, 940);
                 
