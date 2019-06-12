@@ -17,7 +17,7 @@ public class Scrum extends Application
     public void start(Stage primaryStage) 
     {
         GridPane root = new GridPane();
-        Scene scene = new Scene(root, 300, 250);
+        Scene scene = new Scene(root);
 
         // start here new Gui
         new Rebus(root);
