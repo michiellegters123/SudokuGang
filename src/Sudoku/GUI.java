@@ -3,51 +3,110 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package eindescapecode;
+package Sudoku;
 
-import javafx.geometry.HPos;
+import Game.InterFace;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 /**
  *
- * @author Teun
+ * @author jiand
  */
 public class GUI
 {
-    private final Label label;
-    private final TextField tekstveld;
-    private final Button knop;
-    
-    public GUI(GridPane pane)
+    private final Label Woord;
+    private final Button klik;
+    private final VBox v1; 
+    private final TextField t1;
+    Stage primaryStage;
+
+    public GUI(GridPane p)
     {
-        Alert alert = new Alert(Alert.AlertType.NONE,"default Dialog",ButtonType.FINISH);
-        label = new Label("Vul hier de laaste code in om weg te komen van het schip");
-        tekstveld = new TextField();
-        knop = new Button("Voer code in");
-        knop.setOnAction(event ->{
-        if(tekstveld.getText().equals("56136"))
-        {
-            alert.setHeaderText("Gefeliciteerd!");
-            alert.setContentText("Je hebt de escape room gehaald");
-            alert.show();
-        }
+        Woord = new Label("      Voor hier de laatste code in om weg te komen van het schip");
+        klik = new Button("Voer code in");
+        v1 = new VBox(); 
+        t1 = new TextField();
+                
+        t1.setMaxWidth(150);
+        t1.setPrefWidth(t1.getText().length() * 7);
+        t1.setAlignment(Pos.CENTER);
+        
+        Woord.setStyle("-fx-font: 30 arial;");
+        klik.setAlignment(Pos.CENTER);
+ 
+        
+        v1.setPadding(new Insets(100, 0, 0,0));
+        v1.setAlignment(Pos.CENTER);
+        v1.getChildren().addAll(Woord,t1,klik);
+        
+        
+        klik.setOnAction(event ->{
+            String antwoord = "reddingsboot";
+            
+            if(Woord.getText().equals(antwoord))
+            {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Correct");
+                alert.setHeaderText("Gefeliciteerd");
+                alert.setContentText("De sleutel is: krijg ****");
+                alert.showAndWait();
+                
+                GridPane root = new GridPane();
+                Stage dialog = new Stage();
+                dialog.initModality(Modality.APPLICATION_MODAL);
+                dialog.setTitle("Sudoku");
+                dialog.initOwner(primaryStage);
+                Scene scene = new Scene(root, 580, 300);
+                
+                new GUI(root);
+                dialog.setScene(scene);
+                dialog.show();
+            }
+            else
+            {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("FOUT");
+                alert.setHeaderText("Gefaald");
+                alert.setContentText("U heeft het woord verkeerd geraden");
+                alert.showAndWait();
+            }
         });
-        pane.add(label, 0, 0);
-        pane.add(tekstveld, 0, 1);
-        pane.add(knop, 0, 2);
-        pane.setVgap(10);
-        label.setAlignment(Pos.CENTER);
-        tekstveld.setAlignment(Pos.CENTER);
-        tekstveld.setMaxWidth(100);
-        knop.setAlignment(Pos.CENTER);
-        GridPane.setHalignment(label, HPos.CENTER);
-        GridPane.setHalignment(tekstveld, HPos.CENTER);
-        GridPane.setHalignment(knop, HPos.CENTER);
+        
+        t1.setOnAction(event ->{
+            String antwoord = "56136";
+            
+            if(t1.getText().equals(antwoord))
+            {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Correct");
+                alert.setHeaderText("Gefeliciteerd");
+                alert.setContentText("Je hebt de escape room gehaald");
+                alert.showAndWait();   
+            }
+            else
+            {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("FOUT");
+                alert.setHeaderText("Gefaald");
+                alert.setContentText("Verkeerde vode probeer het opnieuw");
+                alert.showAndWait();
+            }
+        });
+        
+        
+        p.add(v1,6,2);
+        
+        
     }
+    
 }

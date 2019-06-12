@@ -18,7 +18,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 
-public class InterFace
+public class InterFace implements Interface.Sluiten
 {
     private final Button land1, land2, land3, land4, land5, land6, land7, land8, enter;
     private final ImageView foto1, foto2, foto3, foto4, foto5, foto6, foto7, foto8;
@@ -226,6 +226,12 @@ public class InterFace
         p.add(uitleg,1,3, 2, 2);
         p.add(uitkomst,1,5);
         p.add(enter,2,5);
+    }
+
+    @Override
+    public void sluiten()
+    {
+        
     }
 
 }

@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package eindescapecode;
+package Sudoku;
 
 import javafx.application.Application;
 import javafx.scene.Scene;

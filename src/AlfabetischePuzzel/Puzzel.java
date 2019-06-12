@@ -5,14 +5,19 @@
  */
 package AlfabetischePuzzel;
 
+import Game.InterFace;
+import Sudoku.GUI;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 /**
  *
@@ -24,6 +29,7 @@ public class Puzzel
     private final Button klik;
     private final VBox v1; 
     private final TextField t1;
+    Stage primaryStage;
 
     public Puzzel(GridPane p)
     {
@@ -46,15 +52,26 @@ public class Puzzel
         
         
         klik.setOnAction(event ->{
-            String antwoord = "Reddingsboot";
+            String antwoord = "reddingsboot";
             
             if(Woord.getText().equals(antwoord))
             {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Correct");
                 alert.setHeaderText("Gefeliciteerd");
-                alert.setContentText("De sleutel is: krijg a**s");
+                alert.setContentText("De sleutel is: krijg ****");
                 alert.showAndWait();
+                
+                GridPane root = new GridPane();
+                Stage dialog = new Stage();
+                dialog.initModality(Modality.APPLICATION_MODAL);
+                dialog.setTitle("Sudoku");
+                dialog.initOwner(primaryStage);
+                Scene scene = new Scene(root, 580, 300);
+                
+                new GUI(root);
+                dialog.setScene(scene);
+                dialog.show();
             }
             else
             {
@@ -75,7 +92,18 @@ public class Puzzel
                 alert.setTitle("Correct");
                 alert.setHeaderText("Gefeliciteerd");
                 alert.setContentText("De sleutel is ****");
-                alert.showAndWait();    
+                alert.showAndWait();   
+                
+                GridPane root = new GridPane();
+                Stage dialog = new Stage();
+                dialog.initModality(Modality.APPLICATION_MODAL);
+                dialog.setTitle("Sudoku");
+                dialog.initOwner(primaryStage);
+                Scene scene = new Scene(root, 900, 300);
+                
+                new GUI(root);
+                dialog.setScene(scene);
+                dialog.show();
             }
             else
             {
