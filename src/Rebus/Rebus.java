@@ -10,6 +10,7 @@ package Rebus;
 
 import Game.InterFace;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -161,9 +162,16 @@ public class Rebus
                 dialog.initOwner(primaryStage);
                 Scene scene = new Scene(root, 900, 940);
                 
+
                 new InterFace(root);
                 dialog.setScene(scene);
                 dialog.show();
+                
+                Alert alerts = new Alert(Alert.AlertType.INFORMATION);
+                alerts.setTitle("Well done!!");
+                alerts.setHeaderText("WELKOM");
+                alerts.setContentText("Je hebt het Succesvol het wachtwoord van de Game geraden." + "\r\n" + "Deze game bestaat uit 3 puzzels, maar let goed op..." + "\r\n" + "misschien heb je een van de puzzels wel later nodig!");
+                alerts.showAndWait();
             }
             else
             {
