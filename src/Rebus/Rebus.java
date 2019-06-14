@@ -8,7 +8,7 @@ package Rebus;
 
 
 
-import Game.InterFace;
+import Game.Locker;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -157,11 +157,11 @@ public class Rebus
                 GridPane root = new GridPane();
                 Stage dialog = new Stage();
                 dialog.initModality(Modality.APPLICATION_MODAL);
-                dialog.setTitle("Landen puzzel");
+                dialog.setTitle("Locker");
                 dialog.initOwner(primaryStage);
                 Scene scene = new Scene(root, 900, 940);
                 
-                new InterFace(root);
+                new Locker(root);
                 dialog.setScene(scene);
                 dialog.show();
             }
