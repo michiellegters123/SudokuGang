@@ -60,9 +60,15 @@ public class BattleshipController implements Initializable {
     private AI ai = new AI();
     private int begin, eind;
     private String format = "mm";
+    private int winstreak = 2;
+    
     
     
 
+    @FXML
+    private Rectangle boat9;
+    @FXML
+    private Rectangle boat10;
     @FXML
     private Rectangle boat1;
     @FXML
@@ -128,21 +134,7 @@ public class BattleshipController implements Initializable {
     /**
      * Puts game into Set-up state
      */
-    public void reset() 
-    {
-        Date date1 = new Date();
-        Calendar c1 = GregorianCalendar.getInstance();
-        c1.setTime(date1); 
-        int eind = c1.get(Calendar.MINUTE);
-        
-        this.eind = eind;
-        System.out.println(""+ eind);
-        
-        int duur = this.eind - this.begin;
-        System.out.println("" + duur);
-        
-        
-        
+  public void reset() {
         startButton.disableProperty().set(true);
 
         selectedShip = boat1;
@@ -192,6 +184,138 @@ public class BattleshipController implements Initializable {
         boat8.setLayoutX(30);
         boat8.setLayoutY(550);
         boat8.setRotate(0);
+
+        for (Node node : pcDisplayBoard.getChildren()) {
+            Rectangle rect = (Rectangle) node;
+            rect.setDisable(true);
+        }
+
+        ai.reset();
+    }
+    
+    public void reset2() {
+        startButton.disableProperty().set(true);
+
+        selectedShip = boat1;
+
+        //(re) initialize the display boards
+        pcGrid.initGrid();
+        playerGrid.initGrid();
+        installPlayerBoardListeners(playerGrid);
+
+        //Set-up boats, place them in the right spot
+        installBoatListeners(boat1);
+        boat1.setLayoutX(30);
+        boat1.setLayoutY(340);
+        boat1.setRotate(0);
+
+        installBoatListeners(boat2);
+        boat2.setLayoutX(30);
+        boat2.setLayoutY(370);
+        boat2.setRotate(0);
+
+        installBoatListeners(boat3);
+        boat3.setLayoutX(30);
+        boat3.setLayoutY(400);
+        boat3.setRotate(0);
+
+        installBoatListeners(boat4);
+        boat4.setLayoutX(30);
+        boat4.setLayoutY(430);
+        boat4.setRotate(0);
+
+        installBoatListeners(boat5);
+        boat5.setLayoutX(30);
+        boat5.setLayoutY(460);
+        boat5.setRotate(0);
+
+        installBoatListeners(boat6);
+        boat6.setLayoutX(30);
+        boat6.setLayoutY(490);
+        boat6.setRotate(0);
+
+        installBoatListeners(boat7);
+        boat7.setLayoutX(30);
+        boat7.setLayoutY(520);
+        boat7.setRotate(0);
+
+        installBoatListeners(boat8);
+        boat8.setLayoutX(30);
+        boat8.setLayoutY(550);
+        boat8.setRotate(0);
+        
+          
+        installBoatListeners(boat9);
+        boat9.setLayoutX(30);
+        boat9.setLayoutY(310);
+        boat9.setRotate(0);
+
+        
+
+        for (Node node : pcDisplayBoard.getChildren()) {
+            Rectangle rect = (Rectangle) node;
+            rect.setDisable(true);
+        }
+
+        ai.reset();
+    }
+    
+    public void reset3() {
+        startButton.disableProperty().set(true);
+
+        selectedShip = boat1;
+
+        //(re) initialize the display boards
+        pcGrid.initGrid();
+        playerGrid.initGrid();
+        installPlayerBoardListeners(playerGrid);
+
+        //Set-up boats, place them in the right spot
+        installBoatListeners(boat1);
+        boat1.setLayoutX(30);
+        boat1.setLayoutY(340);
+        boat1.setRotate(0);
+
+        installBoatListeners(boat2);
+        boat2.setLayoutX(30);
+        boat2.setLayoutY(370);
+        boat2.setRotate(0);
+
+        installBoatListeners(boat3);
+        boat3.setLayoutX(30);
+        boat3.setLayoutY(400);
+        boat3.setRotate(0);
+
+        installBoatListeners(boat4);
+        boat4.setLayoutX(30);
+        boat4.setLayoutY(430);
+        boat4.setRotate(0);
+
+        installBoatListeners(boat5);
+        boat5.setLayoutX(30);
+        boat5.setLayoutY(460);
+        boat5.setRotate(0);
+
+        installBoatListeners(boat6);
+        boat6.setLayoutX(30);
+        boat6.setLayoutY(490);
+        boat6.setRotate(0);
+
+        installBoatListeners(boat7);
+        boat7.setLayoutX(30);
+        boat7.setLayoutY(520);
+        boat7.setRotate(0);
+
+        installBoatListeners(boat8);
+        boat8.setLayoutX(30);
+        boat8.setLayoutY(550);
+        boat8.setRotate(0);
+        
+                
+        installBoatListeners(boat10);
+        boat10.setLayoutX(30);
+        boat10.setLayoutY(280);
+        boat10.setRotate(0);
 
         for (Node node : pcDisplayBoard.getChildren()) {
             Rectangle rect = (Rectangle) node;
@@ -349,7 +473,29 @@ public class BattleshipController implements Initializable {
                         winAlert.setContentText("Jij wint!\nBedankt voor het spelen!");
                         winAlert.showAndWait();
                         
-                        reset();
+                        int Level = winstreak;
+                        switch (Level) {                        
+                          case 2:
+                            reset2();
+                            Alert Level2 = new Alert(AlertType.INFORMATION);
+                            Level2.setTitle("Level 2");
+                            Level2.setHeaderText(null);
+                            Level2.setContentText("Je hebt level 2 gehaald. inplaats van 8 schepen heb je er nu 9");
+                            Level2.showAndWait();
+                            winstreak++;
+                            System.out.println("2e level");
+                            break;
+                          case 3:
+                            reset3();
+                            Alert Level3 = new Alert(AlertType.INFORMATION);
+                            Level3.setTitle("Level 2");
+                            Level3.setHeaderText(null);
+                            Level3.setContentText("Je hebt level 3 gehaald, dit is het laatse level. inplaats van 9 schepen heb je er nu 10");
+                            Level3.showAndWait();
+                            System.out.println("3e level");
+                            break;                   
+                        }
+
                     } else {
                         //PC Takes turn
                         //Sleep so user thinks PC is 'thinking.' -- increased immersion

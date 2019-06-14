@@ -18,7 +18,11 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 
+<<<<<<< HEAD
+public class InterFace 
+=======
 public class InterFace
+>>>>>>> 24502d7271319a412bd6a4822b78ac7d5504e25d
 {
     private final Button land1, land2, land3, land4, land5, land6, land7, land8, enter;
     private final ImageView foto1, foto2, foto3, foto4, foto5, foto6, foto7, foto8;
