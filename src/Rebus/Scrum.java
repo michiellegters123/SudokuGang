@@ -23,7 +23,7 @@ public class Scrum extends Application
         new Rebus(root);
 
 
-        primaryStage.setTitle("Los alle rebussen op om in de game te komen");
+        primaryStage.setTitle("Los alle rebussen op voor het code woord");
         primaryStage.setScene(scene);
         primaryStage.show();
         primaryStage.setMaximized(true);

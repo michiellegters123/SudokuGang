@@ -15,13 +15,13 @@ public class GameInterFace extends Application
     public void start(Stage primaryStage) 
     {
         GridPane root = new GridPane();
-        Scene scene = new Scene(root, 900, 960);
+        Scene scene = new Scene(root, 100, 100);
 
-        new InterFace(root);
+        new Locker(root);
 
 
         primaryStage.setTitle("Game");
-        primaryStage.setScene(scene);
+        primaryStage.setScene(scene);       
         primaryStage.show();
     }
 

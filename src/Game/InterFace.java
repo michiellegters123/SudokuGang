@@ -24,11 +24,11 @@ public class InterFace
     private final ImageView foto1, foto2, foto3, foto4, foto5, foto6, foto7, foto8;
     private final Label uitleg;
     private final TextField uitkomst;
-    Stage primaryStage;
+    Stage primaryStage, secondaryStage;
     
     public InterFace(GridPane p)
-    {
-                
+    {              
+        
         foto1 = new ImageView("img/Bulgaria.png");
         land1 = new Button("", foto1);
         
@@ -228,7 +228,6 @@ public class InterFace
         p.add(uitkomst,1,5);
         p.add(enter,2,5);
     }
-
 
 
 }
