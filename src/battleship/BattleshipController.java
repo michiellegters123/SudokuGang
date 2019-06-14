@@ -15,9 +15,15 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
+import java.util.Date;
+import java.util.Calendar;
 
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.ResourceBundle;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
@@ -52,7 +58,17 @@ public class BattleshipController implements Initializable {
     private int IntCurrentScore = 7500;
     private Rectangle selectedShip;
     private AI ai = new AI();
+    private int begin, eind;
+    private String format = "mm";
+    private int winstreak = 2;
+    
+    
+    
 
+    @FXML
+    private Rectangle boat9;
+    @FXML
+    private Rectangle boat10;
     @FXML
     private Rectangle boat1;
     @FXML
@@ -98,7 +114,10 @@ public class BattleshipController implements Initializable {
      * @param rb
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize(URL url, ResourceBundle rb) 
+    {
+        
+        
         LabelH.setText("" + IntHighScore); 
         LabelC.setText("" + IntCurrentScore);
         
@@ -115,7 +134,7 @@ public class BattleshipController implements Initializable {
     /**
      * Puts game into Set-up state
      */
-    public void reset() {
+  public void reset() {
         startButton.disableProperty().set(true);
 
         selectedShip = boat1;
@@ -173,6 +192,138 @@ public class BattleshipController implements Initializable {
 
         ai.reset();
     }
+    
+    public void reset2() {
+        startButton.disableProperty().set(true);
+
+        selectedShip = boat1;
+
+        //(re) initialize the display boards
+        pcGrid.initGrid();
+        playerGrid.initGrid();
+        installPlayerBoardListeners(playerGrid);
+
+        //Set-up boats, place them in the right spot
+        installBoatListeners(boat1);
+        boat1.setLayoutX(30);
+        boat1.setLayoutY(340);
+        boat1.setRotate(0);
+
+        installBoatListeners(boat2);
+        boat2.setLayoutX(30);
+        boat2.setLayoutY(370);
+        boat2.setRotate(0);
+
+        installBoatListeners(boat3);
+        boat3.setLayoutX(30);
+        boat3.setLayoutY(400);
+        boat3.setRotate(0);
+
+        installBoatListeners(boat4);
+        boat4.setLayoutX(30);
+        boat4.setLayoutY(430);
+        boat4.setRotate(0);
+
+        installBoatListeners(boat5);
+        boat5.setLayoutX(30);
+        boat5.setLayoutY(460);
+        boat5.setRotate(0);
+
+        installBoatListeners(boat6);
+        boat6.setLayoutX(30);
+        boat6.setLayoutY(490);
+        boat6.setRotate(0);
+
+        installBoatListeners(boat7);
+        boat7.setLayoutX(30);
+        boat7.setLayoutY(520);
+        boat7.setRotate(0);
+
+        installBoatListeners(boat8);
+        boat8.setLayoutX(30);
+        boat8.setLayoutY(550);
+        boat8.setRotate(0);
+        
+          
+        installBoatListeners(boat9);
+        boat9.setLayoutX(30);
+        boat9.setLayoutY(310);
+        boat9.setRotate(0);
+
+        
+
+        for (Node node : pcDisplayBoard.getChildren()) {
+            Rectangle rect = (Rectangle) node;
+            rect.setDisable(true);
+        }
+
+        ai.reset();
+    }
+    
+    public void reset3() {
+        startButton.disableProperty().set(true);
+
+        selectedShip = boat1;
+
+        //(re) initialize the display boards
+        pcGrid.initGrid();
+        playerGrid.initGrid();
+        installPlayerBoardListeners(playerGrid);
+
+        //Set-up boats, place them in the right spot
+        installBoatListeners(boat1);
+        boat1.setLayoutX(30);
+        boat1.setLayoutY(340);
+        boat1.setRotate(0);
+
+        installBoatListeners(boat2);
+        boat2.setLayoutX(30);
+        boat2.setLayoutY(370);
+        boat2.setRotate(0);
+
+        installBoatListeners(boat3);
+        boat3.setLayoutX(30);
+        boat3.setLayoutY(400);
+        boat3.setRotate(0);
+
+        installBoatListeners(boat4);
+        boat4.setLayoutX(30);
+        boat4.setLayoutY(430);
+        boat4.setRotate(0);
+
+        installBoatListeners(boat5);
+        boat5.setLayoutX(30);
+        boat5.setLayoutY(460);
+        boat5.setRotate(0);
+
+        installBoatListeners(boat6);
+        boat6.setLayoutX(30);
+        boat6.setLayoutY(490);
+        boat6.setRotate(0);
+
+        installBoatListeners(boat7);
+        boat7.setLayoutX(30);
+        boat7.setLayoutY(520);
+        boat7.setRotate(0);
+
+        installBoatListeners(boat8);
+        boat8.setLayoutX(30);
+        boat8.setLayoutY(550);
+        boat8.setRotate(0);
+        
+                
+        installBoatListeners(boat10);
+        boat10.setLayoutX(30);
+        boat10.setLayoutY(280);
+        boat10.setRotate(0);
+
+        for (Node node : pcDisplayBoard.getChildren()) {
+            Rectangle rect = (Rectangle) node;
+            rect.setDisable(true);
+        }
+
+        ai.reset();
+    }
 
     /**
      * Install listeners on rectangles to install drag/drop, interact with displayBoard, etc.
@@ -182,7 +333,6 @@ public class BattleshipController implements Initializable {
     private void installBoatListeners(Node boat) {
         final Delta dragDelta = new Delta();
 
-        //Handle dragging, using help from http://stackoverflow.com/questions/22139615/dragging-buttons-in-javafx
         boat.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
@@ -230,7 +380,6 @@ public class BattleshipController implements Initializable {
                                             Rectangle r = (Rectangle) playerGrid.getNode(x, y + i);
                                             r.setFill(Color.BLACK);
                                         }
-
                                     }
                                 }
                             }
@@ -324,12 +473,34 @@ public class BattleshipController implements Initializable {
                         winAlert.setContentText("Jij wint!\nBedankt voor het spelen!");
                         winAlert.showAndWait();
                         
-                        reset();
+                        int Level = winstreak;
+                        switch (Level) {                        
+                          case 2:
+                            reset2();
+                            Alert Level2 = new Alert(AlertType.INFORMATION);
+                            Level2.setTitle("Level 2");
+                            Level2.setHeaderText(null);
+                            Level2.setContentText("Je hebt level 2 gehaald. inplaats van 8 schepen heb je er nu 9");
+                            Level2.showAndWait();
+                            winstreak++;
+                            System.out.println("2e level");
+                            break;
+                          case 3:
+                            reset3();
+                            Alert Level3 = new Alert(AlertType.INFORMATION);
+                            Level3.setTitle("Level 2");
+                            Level3.setHeaderText(null);
+                            Level3.setContentText("Je hebt level 3 gehaald, dit is het laatse level. inplaats van 9 schepen heb je er nu 10");
+                            Level3.showAndWait();
+                            System.out.println("3e level");
+                            break;                   
+                        }
+
                     } else {
                         //PC Takes turn
                         //Sleep so user thinks PC is 'thinking.' -- increased immersion
                         try {
-                            TimeUnit.MILLISECONDS.sleep(200);
+                            TimeUnit.MICROSECONDS.sleep(200);
                         } catch (InterruptedException ex) {
                             Logger.getLogger(BattleshipController.class.getName()).log(Level.SEVERE, null, ex);
                         }
@@ -341,6 +512,7 @@ public class BattleshipController implements Initializable {
                             ai.generate();
                             x = ai.nextX();
                             y = ai.nextY();
+                            
                         }
                         playerGrid.guess(x, y, ai);
                         if (playerGrid.checkWin()) {
@@ -481,12 +653,23 @@ public class BattleshipController implements Initializable {
      * @param event
      */
     @FXML
-    private void startGame(ActionEvent event) {        
+    private void startGame(ActionEvent event) {  
+        Date date = new Date();
+        Calendar c = GregorianCalendar.getInstance();
+        c.setTime(date); 
+        int begin = c.get(Calendar.MINUTE);
+        this.begin = begin;
+        System.out.println(""+ begin);
+        
+       
+        
         Alert startAlert = new Alert(AlertType.INFORMATION);
         startAlert.setTitle("Starting. . .");
         startAlert.setHeaderText(null);
         startAlert.setContentText("Goed gedaan!\nJij mag als eerst!\nSelecteer de plek op het bovenste bord die je wilt raden.");
         startAlert.showAndWait();
+        
+        
 
         //Deselect boat
         select(null);

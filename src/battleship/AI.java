@@ -239,7 +239,8 @@ public class AI {
         }
     }
 
-    void printCurrentData(){
+    void printCurrentData()
+    {
         System.out.println("X: " + x);
         System.out.println("Y: " + y);
         System.out.println("Last Guess Hit: " + lastGuessHit);

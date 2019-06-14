@@ -28,7 +28,7 @@ public class PlayerGrid extends Grid{
             }
             gameBoard.add(row);
         }
-        
+                
         ships.clear();
         
         this.clearDisplayBoard();

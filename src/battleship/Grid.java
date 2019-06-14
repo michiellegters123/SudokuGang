@@ -21,6 +21,7 @@ public abstract class Grid {
     int mode;
     ArrayList<ArrayList<Space>> gameBoard;
     ArrayList<Ship> ships;
+    private int score = 7500;
      
     /**
      *
@@ -101,6 +102,8 @@ public abstract class Grid {
      * @param row the row index to be guessed
      * @param ai the Artificial Intelligence used to guess next spot
      */
+    
+    
     void guess(int col, int row, AI ai) {
         //For convenience-----------------------
         GridPane gp = this.displayBoard;
@@ -114,11 +117,14 @@ public abstract class Grid {
             System.out.println("FAIL");
             System.out.println("Col: " + col + "\nRow: " + row);
         }
+        
+        
         Node n = this.getNode(col, row);
         Rectangle r = (Rectangle) n;
         if (s != null) {
             r.setFill(Color.PURPLE);
-            if (s.hit()) {
+            if (s.hit()) 
+            {
                 for (int x = s.getStartX(); x <= s.getEndX(); x++) {
                     for (int y = s.getStartY(); y <= s.getEndY(); y++) {
                         Node paintNode = this.getNode(x, y);
@@ -130,8 +136,11 @@ public abstract class Grid {
                 //If PC is guessing, provide feedback to the AI
                 if (mode == 1) {   //if PC is guessing AND ship is destroyed
                     ai.feedback(true, true);
+
                 }
-            } else {
+            } 
+            else 
+            {
                 if (mode == 1) {   //if PC is guessing and ship is hit but not destroyed
                     ai.feedback(true, false);
                 }
@@ -139,7 +148,10 @@ public abstract class Grid {
         } else {    //If PC is guessing and ship is not hit and not destroyed
             r.setFill(Color.WHITE);
             r.setStroke(Color.BLACK);
-            if (mode == 1) {
+            
+
+            if (mode == 1)
+            {
                 ai.feedback(false, false);
             }
         }

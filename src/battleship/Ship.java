@@ -142,7 +142,6 @@ public class Ship {
         if (this.hits >= this.size) {
             this.destroyed = true;
         }
-
         return this.destroyed;
     }
 
