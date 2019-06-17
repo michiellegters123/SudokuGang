@@ -122,7 +122,7 @@ public class BattleshipController implements Initializable {
         LabelC.setText("" + IntCurrentScore);
         
         Alert startAlert = new Alert(AlertType.INFORMATION);
-        startAlert.setTitle("Welcome");
+        startAlert.setTitle("Welkom");
         startAlert.setHeaderText(null);
         startAlert.setContentText("Welkom bij de game!\nBegin alsjeblieft met het plaatsen van je schepen op het onderste-bord.\n(Klik om te draaien, Sleep om te plaatsenabout)");
         startAlert.showAndWait();
