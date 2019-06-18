@@ -23,7 +23,7 @@ public class KleurPuzzel extends Application {
         new GUI(root);
         Scene scene = new Scene(root, 450, 315);
 
-        primaryStage.setTitle("Hello World!");
+        primaryStage.setTitle("Kleuren Puzzel");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
