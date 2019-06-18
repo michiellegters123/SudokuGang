@@ -109,6 +109,10 @@ public class BattleshipController implements Initializable {
     private Label timerLabel;
     @FXML
     private Label LabelH;
+    @FXML
+    private Label LabelOver1;
+    @FXML
+    private Label LabelOver2;
     
     private static final int STARTTIME = 90;
     private Timeline timeline;
@@ -372,7 +376,8 @@ public class BattleshipController implements Initializable {
 
                     if (grid.checkWin()) {
                         timeline.stop();   
-                        LabelH.textProperty().bind(timeSeconds.asString());                        
+                        LabelH.textProperty().bind(timeSeconds.asString());    
+                        LabelOver1.setVisible(true);
                         
                         Alert winAlert = new Alert(AlertType.INFORMATION);
                         winAlert.setTitle("VICTORY");
@@ -401,6 +406,7 @@ public class BattleshipController implements Initializable {
                         playerGrid.guess(x, y, ai);
                         if (playerGrid.checkWin()) {
                             timeline.stop();
+                            timeSeconds.set(90);
                             Alert loseAlert = new Alert(AlertType.INFORMATION);
                             loseAlert.setTitle("DEFEAT");
                             loseAlert.setHeaderText(null);
