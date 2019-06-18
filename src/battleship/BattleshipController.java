@@ -137,7 +137,7 @@ public class BattleshipController implements Initializable {
         Alert startAlert = new Alert(AlertType.INFORMATION);
         startAlert.setTitle("Welcome");
         startAlert.setHeaderText(null);
-        startAlert.setContentText("Welkom bij de game!\nBegin alsjeblieft met het plaatsen van je schepen op het onderste-bord.\n(Klik om te draaien, Sleep om te plaatsenabout)");
+        startAlert.setContentText("Welkom bij de game!\nBegin alsjeblieft met het plaatsen van je schepen op het onderste-bord.\n(Klik om te draaien, Sleep om te plaatsen. \n LETOP!! druk niet te snel");
         startAlert.showAndWait();
         playerGrid = new PlayerGrid(playerDisplayBoard);
         pcGrid = new PCGrid(pcDisplayBoard);
