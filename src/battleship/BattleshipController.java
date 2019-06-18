@@ -28,7 +28,13 @@ import java.util.ResourceBundle;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.scene.control.Label;
+import javafx.util.Duration;
 
 /**
  * FXML Controller class
@@ -100,11 +106,13 @@ public class BattleshipController implements Initializable {
     @FXML
     private Label CurrentScore;
     @FXML
-    private Label LabelC;
+    private Label timerLabel;
     @FXML
     private Label LabelH;
     
-    
+    private static final int STARTTIME = 90;
+    private Timeline timeline;
+    private final IntegerProperty timeSeconds = new SimpleIntegerProperty(STARTTIME);
     
 
     /**
@@ -116,19 +124,35 @@ public class BattleshipController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) 
     {
-        
+        timerLabel.textProperty().bind(timeSeconds.asString());
+
         
         LabelH.setText("" + IntHighScore); 
-        LabelC.setText("" + IntCurrentScore);
+       
         
         Alert startAlert = new Alert(AlertType.INFORMATION);
-        startAlert.setTitle("Welkom");
+        startAlert.setTitle("Welcome");
         startAlert.setHeaderText(null);
         startAlert.setContentText("Welkom bij de game!\nBegin alsjeblieft met het plaatsen van je schepen op het onderste-bord.\n(Klik om te draaien, Sleep om te plaatsenabout)");
         startAlert.showAndWait();
         playerGrid = new PlayerGrid(playerDisplayBoard);
         pcGrid = new PCGrid(pcDisplayBoard);
         reset();
+        
+
+    }
+    
+    private void updateTime() {
+        // increment seconds
+        int seconds = timeSeconds.get();
+        timeSeconds.set(seconds-1);
+        
+        if(seconds == 0)
+        {
+            timeline.stop(); 
+            reset();            
+            timeSeconds.set(seconds);
+        }
     }
 
     /**
@@ -136,16 +160,6 @@ public class BattleshipController implements Initializable {
      */
   public void reset() {
         startButton.disableProperty().set(true);
-        /*
-        Date resetDate = new Date();
-        Calendar cReset = GregorianCalendar.getInstance();
-        cReset.setTime(resetDate); 
-        int eind = cReset.get(Calendar.MINUTE);
-        this.eind = eind;
-        System.out.println(""+ eind);*/
-        
-        System.out.println("Yeet");
-        
 
         selectedShip = boat1;
 
@@ -157,43 +171,53 @@ public class BattleshipController implements Initializable {
         //Set-up boats, place them in the right spot
         installBoatListeners(boat1);
         boat1.setLayoutX(30);
-        boat1.setLayoutY(340);
+        boat1.setLayoutY(280);
         boat1.setRotate(0);
 
         installBoatListeners(boat2);
         boat2.setLayoutX(30);
-        boat2.setLayoutY(370);
+        boat2.setLayoutY(310);
         boat2.setRotate(0);
 
         installBoatListeners(boat3);
         boat3.setLayoutX(30);
-        boat3.setLayoutY(400);
+        boat3.setLayoutY(340);
         boat3.setRotate(0);
 
         installBoatListeners(boat4);
         boat4.setLayoutX(30);
-        boat4.setLayoutY(430);
+        boat4.setLayoutY(370);
         boat4.setRotate(0);
 
         installBoatListeners(boat5);
         boat5.setLayoutX(30);
-        boat5.setLayoutY(460);
+        boat5.setLayoutY(400);
         boat5.setRotate(0);
 
         installBoatListeners(boat6);
         boat6.setLayoutX(30);
-        boat6.setLayoutY(490);
+        boat6.setLayoutY(430);
         boat6.setRotate(0);
 
         installBoatListeners(boat7);
         boat7.setLayoutX(30);
-        boat7.setLayoutY(520);
+        boat7.setLayoutY(460);
         boat7.setRotate(0);
 
         installBoatListeners(boat8);
         boat8.setLayoutX(30);
-        boat8.setLayoutY(550);
+        boat8.setLayoutY(490);
         boat8.setRotate(0);
+        
+        installBoatListeners(boat9);
+        boat9.setLayoutX(30);
+        boat9.setLayoutY(520);
+        boat9.setRotate(0);
+        
+        installBoatListeners(boat10);
+        boat10.setLayoutX(30);
+        boat10.setLayoutY(550);
+        boat10.setRotate(0);
 
         for (Node node : pcDisplayBoard.getChildren()) {
             Rectangle rect = (Rectangle) node;
@@ -202,6 +226,7 @@ public class BattleshipController implements Initializable {
 
         ai.reset();
     }
+    
     /**
      * Install listeners on rectangles to install drag/drop, interact with displayBoard, etc.
      *
@@ -325,6 +350,8 @@ public class BattleshipController implements Initializable {
      * Install listeners on pcBoard rectangles to allow for a way to interact with the PC game board through the PC display board
      */
     void installPCBoardListeners(PCGrid grid) {
+
+        
         for (Node node : pcDisplayBoard.getChildren()) {
             Rectangle rect = (Rectangle) node;
             rect.disableProperty().set(false);
@@ -335,7 +362,7 @@ public class BattleshipController implements Initializable {
                     GridPane g = (GridPane) r.getParent();
 
                     int col = GridPane.getColumnIndex(r);
-                    int row = GridPane.getRowIndex(r);
+                    int row = GridPane.getRowIndex(r);                  
 
                     if (pcGrid.gameBoard.get(col).get(row).isPressed()) {
                         return;
@@ -344,17 +371,20 @@ public class BattleshipController implements Initializable {
                     pcGrid.guess(col, row, ai);
 
                     if (grid.checkWin()) {
+                        timeline.stop();   
+                        LabelH.textProperty().bind(timeSeconds.asString());                        
+                        
                         Alert winAlert = new Alert(AlertType.INFORMATION);
                         winAlert.setTitle("VICTORY");
                         winAlert.setHeaderText(null);
                         winAlert.setContentText("Jij wint!\nBedankt voor het spelen!");
-                        winAlert.showAndWait();
-
+                        winAlert.showAndWait(); 
+                        reset(); 
                     } else {
                         //PC Takes turn
                         //Sleep so user thinks PC is 'thinking.' -- increased immersion
                         try {
-                            TimeUnit.MICROSECONDS.sleep(200);
+                            TimeUnit.MILLISECONDS.sleep(200);
                         } catch (InterruptedException ex) {
                             Logger.getLogger(BattleshipController.class.getName()).log(Level.SEVERE, null, ex);
                         }
@@ -370,6 +400,7 @@ public class BattleshipController implements Initializable {
                         }
                         playerGrid.guess(x, y, ai);
                         if (playerGrid.checkWin()) {
+                            timeline.stop();
                             Alert loseAlert = new Alert(AlertType.INFORMATION);
                             loseAlert.setTitle("DEFEAT");
                             loseAlert.setHeaderText(null);
@@ -507,15 +538,9 @@ public class BattleshipController implements Initializable {
      * @param event
      */
     @FXML
-    private void startGame(ActionEvent event) {  
-        Date date = new Date();
-        Calendar c = GregorianCalendar.getInstance();
-        c.setTime(date); 
-        int begin = c.get(Calendar.MINUTE);
-        this.begin = begin;
-        System.out.println(""+ begin);
-        
+    private void startGame(ActionEvent event) {       
        
+   
         
         Alert startAlert = new Alert(AlertType.INFORMATION);
         startAlert.setTitle("Starting. . .");
@@ -523,7 +548,11 @@ public class BattleshipController implements Initializable {
         startAlert.setContentText("Goed gedaan!\nJij mag als eerst!\nSelecteer de plek op het bovenste bord die je wilt raden.");
         startAlert.showAndWait();
         
-        
+        timeline = new Timeline(new KeyFrame(Duration.seconds(1), evt -> updateTime())); 
+        timeline.setCycleCount(Animation.INDEFINITE); // repeat over and over again
+        timeSeconds.set(STARTTIME);
+        timeline.play();        
+   
 
         //Deselect boat
         select(null);

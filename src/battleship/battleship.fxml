@@ -267,15 +267,17 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             </rowConstraints>
         </GridPane>
-        <Rectangle fx:id="boat4" arcHeight="50.0" arcWidth="200.0" height="20.0" layoutX="30.0" layoutY="430.0" stroke="WHITE" strokeType="INSIDE" width="90.0" />
-      <Rectangle fx:id="boat3" arcHeight="50.0" arcWidth="200.0" height="20.0" layoutX="30.0" layoutY="400.0" stroke="WHITE" strokeType="INSIDE" width="90.0" />
-      <Rectangle fx:id="boat7" arcHeight="5.0" arcWidth="5.0" height="20.0" layoutX="30.0" layoutY="520.0" stroke="WHITE" strokeType="INSIDE" width="150.0" />
-      <Rectangle fx:id="boat2" arcHeight="100.0" arcWidth="30.0" height="20.0" layoutX="30.0" layoutY="370.0" stroke="WHITE" strokeType="INSIDE" width="60.0" />
+        <Rectangle id="5" fx:id="boat5" arcHeight="50.0" arcWidth="200.0" height="20.0" layoutX="30.0" layoutY="400.0" stroke="WHITE" strokeType="INSIDE" width="90.0" />
+      <Rectangle id="4" fx:id="boat4" arcHeight="50.0" arcWidth="200.0" height="20.0" layoutX="30.0" layoutY="370.0" stroke="WHITE" strokeType="INSIDE" width="90.0" />
+      <Rectangle id="9" fx:id="boat9" arcHeight="5.0" arcWidth="5.0" height="20.0" layoutX="30.0" layoutY="520.0" stroke="WHITE" strokeType="INSIDE" width="150.0" />
+      <Rectangle id="3" fx:id="boat3" arcHeight="100.0" arcWidth="30.0" height="20.0" layoutX="30.0" layoutY="340.0" stroke="WHITE" strokeType="INSIDE" width="60.0" />
       <Button fx:id="startButton" layoutX="611.0" layoutY="591.0" mnemonicParsing="false" onAction="#startGame" text="Start Game" />
-      <Rectangle fx:id="boat1" arcHeight="100.0" arcWidth="30.0" height="20.0" layoutX="30.0" layoutY="340.0" stroke="WHITE" strokeType="INSIDE" width="60.0" />
-      <Rectangle fx:id="boat8" arcHeight="5.0" arcWidth="5.0" height="20.0" layoutX="30.0" layoutY="550.0" stroke="WHITE" strokeType="INSIDE" width="150.0" />
-      <Rectangle fx:id="boat5" arcHeight="50.0" arcWidth="50.0" height="20.0" layoutX="30.0" layoutY="460.0" stroke="WHITE" strokeType="INSIDE" width="120.0" />
-      <Rectangle fx:id="boat6" arcHeight="50.0" arcWidth="50.0" height="20.0" layoutX="30.0" layoutY="490.0" stroke="WHITE" strokeLineCap="ROUND" strokeType="INSIDE" width="120.0" />
+      <Rectangle id="2" fx:id="boat2" arcHeight="100.0" arcWidth="30.0" height="20.0" layoutX="30.0" layoutY="311.0" stroke="WHITE" strokeType="INSIDE" width="60.0" />
+      <Rectangle id="10" fx:id="boat10" arcHeight="5.0" arcWidth="5.0" height="20.0" layoutX="30.0" layoutY="550.0" stroke="WHITE" strokeType="INSIDE" width="150.0" />
+      <Rectangle id="6" fx:id="boat6" arcHeight="50.0" arcWidth="50.0" height="20.0" layoutX="30.0" layoutY="430.0" stroke="WHITE" strokeType="INSIDE" width="120.0" />
+      <Rectangle id="7" fx:id="boat7" arcHeight="50.0" arcWidth="50.0" height="20.0" layoutX="30.0" layoutY="460.0" stroke="WHITE" strokeLineCap="ROUND" strokeType="INSIDE" width="120.0" />  
+      <Rectangle id="8" fx:id="boat8" arcHeight="5.0" arcWidth="5.0" height="20.0" layoutX="30.0" layoutY="490.0" stroke="WHITE" strokeType="INSIDE" width="150.0" />
+      <Rectangle id="1" fx:id="boat1" arcHeight="100.0" arcWidth="30.0" height="20.0" layoutX="30.0" layoutY="281.0" stroke="WHITE" strokeType="INSIDE" width="60.0" />
       <Button fx:id="aboutButton" layoutX="30.0" layoutY="591.0" mnemonicParsing="false" onAction="#showAbout" text="Info" />
       <Label fx:id="HighScore" layoutY="0" text="HighScore" textFill="RED">
          <font>
@@ -289,11 +291,12 @@
          <font>
             <Font size="20.0" />
          </font>
-      </Label>
-      <Label fx:id="LabelC" layoutX="129.0" layoutY="24.0" text="Label" textFill="RED">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Label>
+      </Label>      
+      <Label fx:id="timerLabel" layoutX="129.0" layoutY="24.0" prefHeight="17.0" prefWidth="65.0" 
+       textFill="#f20b0b">
+    <font>
+        <Font size="20.0" />
+    </font>
+</Label>      
     </children>
 </AnchorPane>
