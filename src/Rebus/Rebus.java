@@ -8,7 +8,8 @@ package Rebus;
 
 
 
-import Game.Locker;
+
+import Main.MainScreen;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -32,7 +33,7 @@ public class Rebus
     private final Label lblK,lblA,lblP,lblI,lblT,lblE,lblN, lblWW,lblgWW;
     Stage primaryStage; 
     
-    Rebus(GridPane p)
+    public Rebus(GridPane p)
     {
         // imageviews
         k = new ImageView();
@@ -153,15 +154,17 @@ public class Rebus
             
             if(txtWW.getText().equals(antwoord))
             {
-                lblgWW.setText("ww"); 
+                 Stage stage = (Stage) txtWW.getScene().getWindow();
+                stage.close();
+                
                 GridPane root = new GridPane();
                 Stage dialog = new Stage();
                 dialog.initModality(Modality.APPLICATION_MODAL);
-                dialog.setTitle("Locker");
+                dialog.setTitle("MainScreen");
                 dialog.initOwner(primaryStage);
-                Scene scene = new Scene(root, 900, 940);
+                Scene scene = new Scene(root);
                 
-                new Locker(root);
+                new MainScreen(root); 
                 dialog.setScene(scene);
                 dialog.show();
             }

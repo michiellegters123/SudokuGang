@@ -1,5 +1,8 @@
 package battleship;
 
+import Main.MainScreen;
+import Sudoku.GUI3;
+import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -33,7 +36,12 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import javafx.util.Duration;
 
 /**
@@ -67,7 +75,7 @@ public class BattleshipController implements Initializable {
     private int begin, eind;
     private String format = "mm";
     private int winstreak = 2;
-    
+    Stage primaryStage,stage;
     
     
 
@@ -113,6 +121,8 @@ public class BattleshipController implements Initializable {
     private Label LabelOver1;
     @FXML
     private Label LabelOver2;
+    @FXML
+    private Button terugbutton; 
     
     private static final int STARTTIME = 90;
     private Timeline timeline;
@@ -163,6 +173,8 @@ public class BattleshipController implements Initializable {
      * Puts game into Set-up state
      */
   public void reset() {
+      
+         
         startButton.disableProperty().set(true);
 
         selectedShip = boat1;
@@ -375,16 +387,19 @@ public class BattleshipController implements Initializable {
                     pcGrid.guess(col, row, ai);
 
                     if (grid.checkWin()) {
-                        timeline.stop();   
-                        LabelH.textProperty().bind(timeSeconds.asString());    
-                        LabelOver1.setVisible(true);
+                        timeline.stop();                        
+                        LabelH.textProperty().bind(timeSeconds.asString()); 
+                        LabelOver1.setVisible(true);    
                         
                         Alert winAlert = new Alert(AlertType.INFORMATION);
                         winAlert.setTitle("VICTORY");
                         winAlert.setHeaderText(null);
                         winAlert.setContentText("Jij wint!\nBedankt voor het spelen!");
                         winAlert.showAndWait(); 
-                        reset(); 
+                        startButton.setVisible(false);
+                        terugbutton.setVisible(true);
+                        
+                        reset();                         
                     } else {
                         //PC Takes turn
                         //Sleep so user thinks PC is 'thinking.' -- increased immersion
@@ -405,6 +420,7 @@ public class BattleshipController implements Initializable {
                         }
                         playerGrid.guess(x, y, ai);
                         if (playerGrid.checkWin()) {
+                            
                             timeline.stop();
                             timeSeconds.set(90);
                             Alert loseAlert = new Alert(AlertType.INFORMATION);
@@ -413,6 +429,7 @@ public class BattleshipController implements Initializable {
                             loseAlert.setContentText("Jij hebt verloren.\nBedankt voor het spelen!");
                             loseAlert.showAndWait();
                             //reset();
+                            
                             
                             reset();
                             
@@ -543,6 +560,25 @@ public class BattleshipController implements Initializable {
      *
      * @param event
      */
+    @FXML
+    private void gaterug(ActionEvent event)
+    {
+        Stage stage = (Stage) terugbutton.getScene().getWindow();
+        stage.close();
+                
+        GridPane root = new GridPane();
+        Stage dialog = new Stage();
+        dialog.initModality(Modality.APPLICATION_MODAL);
+        dialog.setTitle("MainScreen");
+        dialog.initOwner(primaryStage);
+        Scene scene = new Scene(root);
+               
+        new MainScreen(root); 
+        dialog.setScene(scene);
+        dialog.show();
+    }
+    
+    
     @FXML
     private void startGame(ActionEvent event) {       
        
