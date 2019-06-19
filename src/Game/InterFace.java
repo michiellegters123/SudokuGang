@@ -6,6 +6,7 @@
 package Game;
 
 import AlfabetischePuzzel.Puzzel;
+import Main.MainScreen;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -62,14 +63,17 @@ public class InterFace
         {   
             if(uitkomst.getText().equals("kombuis"))
             {                
+                Stage stage = (Stage) enter.getScene().getWindow();
+                stage.close();
+                
                 GridPane root = new GridPane();
                 Stage dialog = new Stage();
                 dialog.initModality(Modality.APPLICATION_MODAL);
-                dialog.setTitle("Los de alfabetische puzzel op om het woord te krijgen!");
+                dialog.setTitle("MainScreen");
                 dialog.initOwner(primaryStage);
-                Scene scene = new Scene(root, 580, 300);
+                Scene scene = new Scene(root);
                 
-                new Puzzel(root);
+                new MainScreen(root); 
                 dialog.setScene(scene);
                 dialog.show();
             }
@@ -86,14 +90,17 @@ public class InterFace
         {
             if(uitkomst.getText().equals("kombuis"))
             {                
+                Stage stage = (Stage) enter.getScene().getWindow();
+                stage.close();
+                
                 GridPane root = new GridPane();
                 Stage dialog = new Stage();
                 dialog.initModality(Modality.APPLICATION_MODAL);
-                dialog.setTitle("Los de alfabetische puzzel op om het woord te krijgen! LET OP: je hebt niet alles nodig");
+                dialog.setTitle("MainScreen");
                 dialog.initOwner(primaryStage);
-                Scene scene = new Scene(root, 580, 300);
+                Scene scene = new Scene(root);
                 
-                new Puzzel(root);
+                new MainScreen(root); 
                 dialog.setScene(scene);
                 dialog.show();
             }

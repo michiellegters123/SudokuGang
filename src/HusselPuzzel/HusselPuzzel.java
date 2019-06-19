@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package Kleurenpuzzel;
+package HusselPuzzel;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -14,17 +14,18 @@ import javafx.stage.Stage;
  *
  * @author Teun
  */
-public class KleurPuzzel extends Application {
+public class HusselPuzzel extends Application {
 
     @Override
     public void start(Stage primaryStage) {
 
         GridPane root = new GridPane();
-        new GUI2(root);
-        Scene scene = new Scene(root, 450, 315);
+        new GUI(root);
+        Scene scene = new Scene(root, 575, 125);
 
-        primaryStage.setTitle("Kleuren Puzzel");
+        primaryStage.setTitle("Hussel-Puzzel!");
         primaryStage.setScene(scene);
+        primaryStage.setResizable(false);
         primaryStage.show();
     }
 

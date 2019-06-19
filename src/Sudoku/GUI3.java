@@ -3,11 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package AlfabetischePuzzel;
+package Sudoku;
 
 import Game.InterFace;
 import Main.MainScreen;
-import Sudoku.GUI3;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -24,19 +23,18 @@ import javafx.stage.Stage;
  *
  * @author jiand
  */
-public class Puzzel
+public class GUI3
 {
     private final Label Woord;
-    private final Button b1;
+    private final Button klik;
     private final VBox v1; 
     private final TextField t1;
-    String antwoord = "reddingsboot";
     Stage primaryStage;
 
-    public Puzzel(GridPane p)
+    public GUI3(GridPane p)
     {
-        Woord = new Label("      a18b5c4d4e9f14g7h19i2j15k15l20m");
-        b1 = new Button("Check");
+        Woord = new Label("         Voor hier de laatste code" + "\r\n" + "  in om weg te komen van het schip");
+        klik = new Button("Voer code in");
         v1 = new VBox(); 
         t1 = new TextField();
                 
@@ -45,25 +43,20 @@ public class Puzzel
         t1.setAlignment(Pos.CENTER);
         
         Woord.setStyle("-fx-font: 30 arial;");
-        b1.setAlignment(Pos.CENTER);
+   
  
         
-        v1.setPadding(new Insets(100, 0, 0,0));
-        v1.setAlignment(Pos.CENTER);
-        v1.getChildren().addAll(Woord,t1,b1);
+        v1.setPadding(new Insets(50, 0, 0,0));
+        v1.setAlignment(Pos.TOP_CENTER);
+        v1.getChildren().addAll(Woord,t1,klik);
         
         
-        b1.setOnAction(event ->{  
+        klik.setOnAction(event ->{
+            String antwoord = "reddingsboot";
             
-            if(t1.getText().equals(antwoord))
+            if(Woord.getText().equals(antwoord))
             {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Correct");
-                alert.setHeaderText("Gefeliciteerd");
-                alert.setContentText("De sleutel is: krijg ****");
-                alert.showAndWait();
-                
-                Stage stage = (Stage) b1.getScene().getWindow();
+                Stage stage = (Stage) klik.getScene().getWindow();
                 stage.close();
                 
                 GridPane root = new GridPane();
@@ -71,6 +64,7 @@ public class Puzzel
                 dialog.initModality(Modality.APPLICATION_MODAL);
                 dialog.setTitle("MainScreen");
                 dialog.initOwner(primaryStage);
+                dialog.setMaximized(true);
                 Scene scene = new Scene(root);
                 
                 new MainScreen(root); 
@@ -87,36 +81,23 @@ public class Puzzel
             }
         });
         
-        t1.setOnAction(event ->{         
+        t1.setOnAction(event ->{
+            String antwoord = "56136";
             
             if(t1.getText().equals(antwoord))
             {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Correct");
                 alert.setHeaderText("Gefeliciteerd");
-                alert.setContentText("De sleutel is: krijg ****");
-                alert.showAndWait();
-                
-                Stage stage = (Stage) t1.getScene().getWindow();
-                stage.close();
-                
-                GridPane root = new GridPane();
-                Stage dialog = new Stage();
-                dialog.initModality(Modality.APPLICATION_MODAL);
-                dialog.setTitle("MainScreen");
-                dialog.initOwner(primaryStage);
-                Scene scene = new Scene(root);
-                
-                new MainScreen(root); 
-                dialog.setScene(scene);
-                dialog.show();
+                alert.setContentText("Je hebt de escape room gehaald");
+                alert.showAndWait();   
             }
             else
             {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("FOUT");
                 alert.setHeaderText("Gefaald");
-                alert.setContentText("U heeft het woord verkeerd geraden");
+                alert.setContentText("Verkeerde vode probeer het opnieuw");
                 alert.showAndWait();
             }
         });
