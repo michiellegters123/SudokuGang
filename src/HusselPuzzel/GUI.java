@@ -35,6 +35,7 @@ public class GUI
                 txt.setText("");
             }
         }
+    
     public GUI(GridPane pane)
     {
         anker = new Label("tiknretkenag");

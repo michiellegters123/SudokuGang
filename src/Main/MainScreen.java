@@ -11,19 +11,14 @@ import Kleurenpuzzel.GUI2;
 import Rebus.Rebus;
 import Sudoku.GUI3;
 import HusselPuzzel.GUI;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 /**
  *
@@ -173,7 +168,14 @@ public class MainScreen
                  }
           });
           
-          b8.setOnAction(event ->{
+          b8.setOnAction(event ->
+          {
+               try {
+			Runtime runTime = Runtime.getRuntime();
+			Process process = runTime.exec("src\\ExeFiles\\CarChallenge.exe");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
           });
           
           b9.setOnAction(event ->{
