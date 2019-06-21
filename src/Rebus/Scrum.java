@@ -24,7 +24,7 @@ public class Scrum extends Application
         new MainScreen(root);
 
 
-        primaryStage.setTitle("Los alle rebussen op voor het code woord");
+        primaryStage.setTitle("Main menu");
         primaryStage.setScene(scene);
         primaryStage.show();
     }

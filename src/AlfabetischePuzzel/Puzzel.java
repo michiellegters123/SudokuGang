@@ -5,9 +5,8 @@
  */
 package AlfabetischePuzzel;
 
-import Game.InterFace;
+
 import Main.MainScreen;
-import Sudoku.GUI3;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -68,7 +67,7 @@ public class Puzzel
         b1.setOnAction(event ->{  
             
             if(t1.getText().equals(antwoord))
-            {
+            {                
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Correct");
                 alert.setHeaderText("Gefeliciteerd");
