@@ -5,13 +5,13 @@
  */
 package Main;
 
+import HPuzzel.GUI;
 import AlfabetischePuzzel.Puzzel;
 import Game.InterFace;
 import Kleurenpuzzel.GUI2;
 import Rebus.Rebus;
 import Sudoku.GUI3;
 import java.io.IOException;
-import HusselPuzzel.GUI;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -49,7 +49,7 @@ public class MainScreen
     {
           AlfabetichepuzzelImage = new ImageView("img/AlfabetichepuzzelImage.png");
           LandenspelImage = new ImageView("img/LandenspelImage.png");
-          HusselPuzzleImage = new ImageView("img/HusselPuzzleImage.jpg");
+          HusselPuzzleImage = new ImageView("img/HPuzzel.jpg");
           KleurenPuzzleImage = new ImageView("img/KleurenPuzzleImage.PNG");
           RebusImage = new ImageView("img/Rebus.jpg");
           SudokuImage = new ImageView("img/SudokuImage.png");

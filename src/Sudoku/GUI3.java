@@ -52,9 +52,9 @@ public class GUI3
         
         
         klik.setOnAction(event ->{
-            String antwoord = "reddingsboot";
+            String antwoord = "56136";
             
-            if(Woord.getText().equals(antwoord))
+            if(t1.getText().equals(antwoord))
             {
                 Stage stage = (Stage) klik.getScene().getWindow();
                 stage.close();
@@ -64,7 +64,6 @@ public class GUI3
                 dialog.initModality(Modality.APPLICATION_MODAL);
                 dialog.setTitle("MainScreen");
                 dialog.initOwner(primaryStage);
-                dialog.setMaximized(true);
                 Scene scene = new Scene(root);
                 
                 new MainScreen(root); 
@@ -76,7 +75,7 @@ public class GUI3
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("FOUT");
                 alert.setHeaderText("Gefaald");
-                alert.setContentText("U heeft het woord verkeerd geraden");
+                alert.setContentText("Verkeerde vode probeer het opnieuw");
                 alert.showAndWait();
             }
         });
@@ -86,11 +85,19 @@ public class GUI3
             
             if(t1.getText().equals(antwoord))
             {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Correct");
-                alert.setHeaderText("Gefeliciteerd");
-                alert.setContentText("Je hebt de escape room gehaald");
-                alert.showAndWait();   
+                Stage stage = (Stage) klik.getScene().getWindow();
+                stage.close();
+                
+                GridPane root = new GridPane();
+                Stage dialog = new Stage();
+                dialog.initModality(Modality.APPLICATION_MODAL);
+                dialog.setTitle("MainScreen");
+                dialog.initOwner(primaryStage);
+                Scene scene = new Scene(root);
+                
+                new MainScreen(root); 
+                dialog.setScene(scene);
+                dialog.show();
             }
             else
             {
