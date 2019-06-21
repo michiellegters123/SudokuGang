@@ -495,7 +495,7 @@ public class BattleshipController implements Initializable {
                                 col = Color.GREEN;
                                 playerGrid.ships.add(ship);
                                 ship.setIsSet(true);
-                                if (playerGrid.ships.size() == 8)
+                                if (playerGrid.ships.size() == 10)
                                     startButton.disableProperty().set(false);
 
                                 for (int i = 0; i < size && i < 9; i++) {

@@ -26,6 +26,7 @@ import javafx.stage.Stage;
  */
 public class MainScreen
 {
+    private boolean bool1 = false;
     private final ImageView foto1,foto2,foto3,foto4,foto5,foto6,foto7,foto8,foto9;
     private final Button b1,b2,b3,b4,b5,b6,b7,b8,b9;
     Stage primaryStage,stage; 
@@ -41,7 +42,7 @@ public class MainScreen
           foto6 = new ImageView("img/SudokuImage.png");
           foto7 = new ImageView("img/ZeelslagImage.png");
           foto8 = new ImageView("img/ImageFill.png");
-          foto9 = new ImageView("img/ImageFill.png");
+          foto9 = new ImageView("img/landkaart.jpg");
           
           b1 = new Button("",foto1);
           b2 = new Button("",foto2);
@@ -53,20 +54,34 @@ public class MainScreen
           b8 = new Button("",foto8);
           b9 = new Button("",foto9);
           
-          b1.setOnAction(event ->{
-                Stage stage = (Stage) b1.getScene().getWindow();
-                stage.close();
+          b9.prefHeight(128);
+          b9.prefWidth(128);
+                    
+          b1.setOnAction(event ->
+          {
+              if(bool1 == true)
+              {
+                  bool1 = true;
+                  System.out.println("Test");
+                    Stage stage = (Stage) b1.getScene().getWindow();
+                    stage.close();
                 
-                GridPane root = new GridPane();
-                Stage dialog = new Stage();
-                dialog.initModality(Modality.APPLICATION_MODAL);
-                dialog.setTitle("Los deze Alfabetische puzzel op om de code te krijgen");
-                dialog.initOwner(primaryStage);
-                Scene scene = new Scene(root, 600, 300);
+                    GridPane root = new GridPane();
+                    Stage dialog = new Stage();
+                    dialog.initModality(Modality.APPLICATION_MODAL);
+                    dialog.setTitle("Los deze Alfabetische puzzel op om de code te krijgen");
+                    dialog.initOwner(primaryStage);
+                    Scene scene = new Scene(root, 600, 300);
                 
-                new Puzzel(root); 
-                dialog.setScene(scene);
-                dialog.show();
+                    new Puzzel(root); 
+                    dialog.setScene(scene);
+                    dialog.show();
+              }
+              else if(bool1 == true)
+              {
+                  System.out.println("Yeet");
+              }
+                
           });
           
           b2.setOnAction(event ->{
@@ -178,7 +193,14 @@ public class MainScreen
 		}
           });
           
-          b9.setOnAction(event ->{
+          b9.setOnAction(event ->
+          {
+              try {
+			Runtime runTime = Runtime.getRuntime();
+			Process process = runTime.exec("src\\ExeFiles\\cordGame.exe");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
           });
           
           
