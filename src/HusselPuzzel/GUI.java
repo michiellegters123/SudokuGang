@@ -5,12 +5,18 @@
  */
 package HusselPuzzel;
 
+import Main.MainScreen;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 /**
  *
@@ -22,6 +28,8 @@ public class GUI
     private final Label anker,uitleg1,uitleg2,hint;
     private final TextField av,nv,kv,ev,rv,kkv,eev,tv,ttv,iv,nnv,gv;  
     private final Button knop;
+    Stage primaryStage;
+    
     public void checkLetter(String letter, TextField txt)
         {
             if(txt.getText().equals(letter))
@@ -35,6 +43,7 @@ public class GUI
                 txt.setText("");
             }
         }
+    
     public GUI(GridPane pane)
     {
         anker = new Label("tiknretkenag");
@@ -69,28 +78,43 @@ public class GUI
         nnv.setMaxWidth(30);
         gv = new TextField();
         gv.setMaxWidth(30);
-        
         knop.setOnAction(event ->{
-            checkLetter("a",av);
-            checkLetter("n",nv);
-            checkLetter("k",kv);
-            checkLetter("e",ev);
-            checkLetter("r",rv);
-            checkLetter("k",kkv);
-            checkLetter("e",eev);
-            checkLetter("t",tv);
-            checkLetter("t",ttv);
-            checkLetter("i",iv);
-            checkLetter("n",nnv);
-            checkLetter("g",gv);
-            tries++;
-            if(tries >=30)
-            {
-                hint.setText("Het zit vast aan een anker");
-            }
+        checkLetter("a",av);
+        checkLetter("n",nv);
+        checkLetter("k",kv);
+        checkLetter("e",ev);
+        checkLetter("r",rv);
+        checkLetter("k",kkv);
+        checkLetter("e",eev);
+        checkLetter("t",tv);
+        checkLetter("t",ttv);
+        checkLetter("i",iv);
+        checkLetter("n",nnv);
+        checkLetter("g",gv);
+        tries++;
+        if(av.getText().equals("a") && nv.getText().equals("n") && kv.getText().equals("k") && ev.getText().equals("e") &&
+           rv.getText().equals("r") && kkv.getText().equals("k") && eev.getText().equals("e") && tv.getText().equals("t") && ttv.getText().equals("t") &&
+           iv.getText().equals("i") && nnv.getText().equals("n") && gv.getText().equals("g"))
+        {           
+            Stage stage = (Stage) knop.getScene().getWindow();
+                stage.close();
+                
+                GridPane root = new GridPane();
+                Stage dialog = new Stage();
+                dialog.initModality(Modality.APPLICATION_MODAL);
+                dialog.setTitle("MainScreen");
+                dialog.initOwner(primaryStage);
+                Scene scene = new Scene(root);
+                
+                new MainScreen(root); 
+                dialog.setScene(scene);
+                dialog.show();
+        }
+        if(tries >=10)
+        {
+            hint.setText("Het zit vast aan een anker");
+        }
         });
-        
-        
         pane.add(uitleg1, 0, 0);
         pane.add(uitleg2, 0, 1);
         pane.add(anker, 0, 2);
