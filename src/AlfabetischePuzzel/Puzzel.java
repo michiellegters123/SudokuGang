@@ -5,8 +5,8 @@
  */
 package AlfabetischePuzzel;
 
-import Game.InterFace;
-import Sudoku.GUI;
+
+import Main.MainScreen;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -26,15 +26,16 @@ import javafx.stage.Stage;
 public class Puzzel
 {
     private final Label Woord;
-    private final Button klik;
+    private final Button b1;
     private final VBox v1; 
     private final TextField t1;
+    String antwoord = "reddingsboot";
     Stage primaryStage;
 
     public Puzzel(GridPane p)
     {
         Woord = new Label("      a18b5c4d4e9f14g7h19i2j15k15l20m");
-        klik = new Button("Check");
+        b1 = new Button("Check");
         v1 = new VBox(); 
         t1 = new TextField();
                 
@@ -43,33 +44,35 @@ public class Puzzel
         t1.setAlignment(Pos.CENTER);
         
         Woord.setStyle("-fx-font: 30 arial;");
-        klik.setAlignment(Pos.CENTER);
+        b1.setAlignment(Pos.CENTER);
  
         
         v1.setPadding(new Insets(100, 0, 0,0));
         v1.setAlignment(Pos.CENTER);
-        v1.getChildren().addAll(Woord,t1,klik);
+        v1.getChildren().addAll(Woord,t1,b1);
         
         
-        klik.setOnAction(event ->{
-            String antwoord = "reddingsboot";
+        b1.setOnAction(event ->{  
             
-            if(Woord.getText().equals(antwoord))
-            {
+            if(t1.getText().equals(antwoord))
+            {                
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Correct");
                 alert.setHeaderText("Gefeliciteerd");
                 alert.setContentText("De sleutel is: krijg ****");
                 alert.showAndWait();
                 
+                Stage stage = (Stage) b1.getScene().getWindow();
+                stage.close();
+                
                 GridPane root = new GridPane();
                 Stage dialog = new Stage();
                 dialog.initModality(Modality.APPLICATION_MODAL);
-                dialog.setTitle("Sudoku");
+                dialog.setTitle("MainScreen");
                 dialog.initOwner(primaryStage);
-                Scene scene = new Scene(root, 580, 300);
+                Scene scene = new Scene(root);
                 
-                new GUI(root);
+                new MainScreen(root); 
                 dialog.setScene(scene);
                 dialog.show();
             }
@@ -83,25 +86,27 @@ public class Puzzel
             }
         });
         
-        t1.setOnAction(event ->{
-            String antwoord = "reddingsboot";
+        t1.setOnAction(event ->{         
             
             if(t1.getText().equals(antwoord))
             {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Correct");
                 alert.setHeaderText("Gefeliciteerd");
-                alert.setContentText("De sleutel is ****");
-                alert.showAndWait();   
+                alert.setContentText("De sleutel is: krijg ****");
+                alert.showAndWait();
+                
+                Stage stage = (Stage) t1.getScene().getWindow();
+                stage.close();
                 
                 GridPane root = new GridPane();
                 Stage dialog = new Stage();
                 dialog.initModality(Modality.APPLICATION_MODAL);
-                dialog.setTitle("Sudoku");
+                dialog.setTitle("MainScreen");
                 dialog.initOwner(primaryStage);
-                Scene scene = new Scene(root, 900, 300);
+                Scene scene = new Scene(root);
                 
-                new GUI(root);
+                new MainScreen(root); 
                 dialog.setScene(scene);
                 dialog.show();
             }

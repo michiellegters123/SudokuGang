@@ -20,7 +20,7 @@ public class KleurPuzzel extends Application {
     public void start(Stage primaryStage) {
 
         GridPane root = new GridPane();
-        new GUI(root);
+        new GUI2(root);
         Scene scene = new Scene(root, 450, 315);
 
         primaryStage.setTitle("Kleuren Puzzel");

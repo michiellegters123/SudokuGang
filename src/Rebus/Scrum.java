@@ -1,6 +1,7 @@
 package Rebus;
 
 import Game.InterFace;
+import Main.MainScreen;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
@@ -20,13 +21,12 @@ public class Scrum extends Application
         Scene scene = new Scene(root);
 
         // start here new Gui
-        new Rebus(root);
+        new MainScreen(root);
 
 
-        primaryStage.setTitle("Los alle rebussen op voor het code woord");
+        primaryStage.setTitle("Main menu");
         primaryStage.setScene(scene);
         primaryStage.show();
-        primaryStage.setMaximized(true);
     }
     
     public void stopProgram()

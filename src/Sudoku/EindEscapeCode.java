@@ -20,7 +20,7 @@ public class EindEscapeCode extends Application {
     public void start(Stage primaryStage) {
 
         GridPane root = new GridPane();
-        new GUI(root);
+        new GUI3(root);
         Scene scene = new Scene(root, 385, 250);
 
         primaryStage.setTitle("Sudoku");
