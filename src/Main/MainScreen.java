@@ -7,7 +7,6 @@ package Main;
 
 import AlfabetischePuzzel.Puzzel;
 import Game.InterFace;
-import HusselPuzzel.GUI;
 import Kleurenpuzzel.GUI2;
 import Rebus.Rebus;
 import Sudoku.GUI3;
@@ -25,13 +24,10 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-<<<<<<< HEAD
-=======
+
 import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
->>>>>>> 6c4bb53ed8473003dca5c6cee87fc6fc5390b6fa
 
 /**
  *
@@ -41,16 +37,11 @@ public class MainScreen
 {
 
     private final ImageView AlfabetichepuzzelImage,LandenspelImage,HusselPuzzleImage,KleurenPuzzleImage,RebusImage,SudokuImage,ZeelslagImage,AutoImage,ImageFill;
-<<<<<<< HEAD
+
     private final Button btnAlfabetPuzzel,btnLandenPuzzel,btnHusselPuzzel,btnKleurenPuzzel,btnRebusPuzzel,btnSudokuPuzzel,btnZeeSlagGame,btnAutoPuzzel,btnCoordGame;
-=======
-    private final Button btnAlfabetPuzzel,btnLandenPuzzel,btnHusselPuzzel,btnKleurenPuzzel,btnRebusPuzzel,btnSudokuPuzzel,btnZeeSlagGame,btnAutoPuzzel,btnImageFile;
 
-    private boolean bool1 = false;
-    private final ImageView foto1,foto2,foto3,foto4,foto5,foto6,foto7,foto8,foto9;
-    private final Button b1,b2,b3,b4,b5,b6,b7,b8,b9;
 
->>>>>>> 6c4bb53ed8473003dca5c6cee87fc6fc5390b6fa
+
     Stage primaryStage,stage; 
   
     
@@ -64,11 +55,8 @@ public class MainScreen
           SudokuImage = new ImageView("img/SudokuImage.png");
           ZeelslagImage = new ImageView("img/ZeelslagImage.png");
           AutoImage = new ImageView("img/AutoImage.png");
-<<<<<<< HEAD
+
           ImageFill = new ImageView("img/landkaart.jpg");
-=======
-          ImageFill = new ImageView("img/ImageFill.png");
->>>>>>> 6c4bb53ed8473003dca5c6cee87fc6fc5390b6fa
           
           
           btnAlfabetPuzzel = new Button("",AlfabetichepuzzelImage);
@@ -79,44 +67,9 @@ public class MainScreen
           btnSudokuPuzzel = new Button("",SudokuImage);
           btnZeeSlagGame = new Button("",ZeelslagImage);
           btnAutoPuzzel = new Button("",AutoImage);
-<<<<<<< HEAD
           btnCoordGame= new Button("",ImageFill);
           
-          
-          btnCoordGame.prefHeight(128);
-          btnCoordGame.prefWidth(128);
-=======
-          btnImageFile= new Button("",ImageFill);
-          
-   
-  
-          btnAlfabetPuzzel.setOnAction(event ->{       
-                Stage stage = (Stage) btnAlfabetPuzzel.getScene().getWindow();
-                stage.close();
 
-          foto1 = new ImageView("img/AlfabetichepuzzelImage.png");
-          foto2 = new ImageView("img/LandenspelImage.png");
-          foto3 = new ImageView("img/HusselPuzzleImage.jpg");
-          foto4 = new ImageView("img/KleurenPuzzleImage.PNG");
-          foto5 = new ImageView("img/Rebus.jpg");
-          foto6 = new ImageView("img/SudokuImage.png");
-          foto7 = new ImageView("img/ZeelslagImage.png");
-          foto8 = new ImageView("img/ImageFill.png");
-          foto9 = new ImageView("img/landkaart.jpg");
-          
-          b1 = new Button("",foto1);
-          b2 = new Button("",foto2);
-          b3 = new Button("",foto3);
-          b4 = new Button("",foto4);
-          b5 = new Button("",foto5);
-          b6 = new Button("",foto6);
-          b7 = new Button("",foto7);
-          b8 = new Button("",foto8);
-          b9 = new Button("",foto9);
-          
-          b9.prefHeight(128);
-          b9.prefWidth(128);
->>>>>>> 6c4bb53ed8473003dca5c6cee87fc6fc5390b6fa
                     
           btnAlfabetPuzzel.setOnAction(event ->
           {            
@@ -134,19 +87,16 @@ public class MainScreen
                     new Puzzel(root); 
                     dialog.setScene(scene);
                     dialog.show();
-<<<<<<< HEAD
-=======
-              }
-              else if(bool1 == true)
-              {
+
+     
                   System.out.println("Yeet");
-              }
+     
                 
 
                 new Puzzel(root); 
                 dialog.setScene(scene);
                 dialog.show();
->>>>>>> 6c4bb53ed8473003dca5c6cee87fc6fc5390b6fa
+
         
           });
           
@@ -180,12 +130,6 @@ public class MainScreen
                 new GUI(root);
                 dialog.setScene(scene);
                 dialog.show();
-                
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Fout");
-                alert.setHeaderText("Helaas");
-                alert.setContentText("Je hebt het antwoord niet correct");
-                alert.showAndWait();
           });
           
           btnKleurenPuzzel.setOnAction(event ->{
@@ -258,7 +202,6 @@ public class MainScreen
 
           btnAutoPuzzel.setOnAction(event ->{
               try {
-<<<<<<< HEAD
 			Runtime runTime = Runtime.getRuntime();
 			Process process = runTime.exec("src\\ExeFiles\\CarChallenge.exe");
 		} catch (IOException e) 
@@ -267,34 +210,15 @@ public class MainScreen
                 }
 
           });
+
           btnCoordGame.setOnAction(event ->
-=======
-			Runtime runTime = Runtime.getRuntime();
-			Process process = runTime.exec("src\\ExeFiles\\CarChallenge.exe");
-		} catch (IOException e) {
-
-          b8.setOnAction(event ->
-          {
-               try {
-			Runtime runTime = Runtime.getRuntime();
-			Process process = runTime.exec("src\\ExeFiles\\CarChallenge.exe");
-		} catch (Exception e) {
-
-			e.printStackTrace();
-		}
-          });
-          
-
-          btnImageFile.setOnAction(event ->{
-
-          b9.setOnAction(event ->
->>>>>>> 6c4bb53ed8473003dca5c6cee87fc6fc5390b6fa
           {
               try {
-			Runtime runTime = Runtime.getRuntime();
-			Process process = runTime.exec("src\\ExeFiles\\cordGame.exe");
-		} catch (IOException e) {
-			e.printStackTrace();
+			            Runtime runTime = Runtime.getRuntime();
+			            Process process = runTime.exec("src\\ExeFiles\\cordGame.exe");
+		}           
+            catch (IOException e) {
+			      e.printStackTrace();
 		}
           });
           
@@ -308,7 +232,6 @@ public class MainScreen
           p.add(btnSudokuPuzzel,1,2);
           p.add(btnZeeSlagGame,2,0);
           p.add(btnAutoPuzzel,2,1);
-<<<<<<< HEAD
           p.add(btnCoordGame,2,2);
           
           Alert startAlert = new Alert(Alert.AlertType.WARNING);
@@ -316,10 +239,6 @@ public class MainScreen
          startAlert.setHeaderText("Onthoud alle codes op!!");
          startAlert.setContentText("Je hebt ze later nodig");
          startAlert.showAndWait();
-=======
-          p.add(btnImageFile,2,2);
->>>>>>> 6c4bb53ed8473003dca5c6cee87fc6fc5390b6fa
-          
     }     
 }
 
