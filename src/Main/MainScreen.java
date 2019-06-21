@@ -7,18 +7,28 @@ package Main;
 
 import AlfabetischePuzzel.Puzzel;
 import Game.InterFace;
+import HusselPuzzel.GUI;
 import Kleurenpuzzel.GUI2;
 import Rebus.Rebus;
 import Sudoku.GUI3;
+import java.io.IOException;
 import HusselPuzzel.GUI;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
+
+
 import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+
+import javafx.scene.layout.GridPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+
 
 /**
  *
@@ -26,14 +36,46 @@ import javafx.stage.Stage;
  */
 public class MainScreen
 {
+
+    private final ImageView AlfabetichepuzzelImage,LandenspelImage,HusselPuzzleImage,KleurenPuzzleImage,RebusImage,SudokuImage,ZeelslagImage,AutoImage,ImageFill;
+    private final Button btnAlfabetPuzzel,btnLandenPuzzel,btnHusselPuzzel,btnKleurenPuzzel,btnRebusPuzzel,btnSudokuPuzzel,btnZeeSlagGame,btnAutoPuzzel,btnImageFile;
+
     private boolean bool1 = false;
     private final ImageView foto1,foto2,foto3,foto4,foto5,foto6,foto7,foto8,foto9;
     private final Button b1,b2,b3,b4,b5,b6,b7,b8,b9;
+
     Stage primaryStage,stage; 
   
-
+    
     public MainScreen(GridPane p)
     {
+          AlfabetichepuzzelImage = new ImageView("img/AlfabetichepuzzelImage.png");
+          LandenspelImage = new ImageView("img/LandenspelImage.png");
+          HusselPuzzleImage = new ImageView("img/HusselPuzzleImage.jpg");
+          KleurenPuzzleImage = new ImageView("img/KleurenPuzzleImage.PNG");
+          RebusImage = new ImageView("img/Rebus.jpg");
+          SudokuImage = new ImageView("img/SudokuImage.png");
+          ZeelslagImage = new ImageView("img/ZeelslagImage.png");
+          AutoImage = new ImageView("img/AutoImage.png");
+          ImageFill = new ImageView("img/ImageFill.png");
+          
+          
+          btnAlfabetPuzzel = new Button("",AlfabetichepuzzelImage);
+          btnLandenPuzzel = new Button("",LandenspelImage);
+          btnHusselPuzzel = new Button("",HusselPuzzleImage);
+          btnKleurenPuzzel = new Button("",KleurenPuzzleImage);
+          btnRebusPuzzel = new Button("",RebusImage);
+          btnSudokuPuzzel = new Button("",SudokuImage);
+          btnZeeSlagGame = new Button("",ZeelslagImage);
+          btnAutoPuzzel = new Button("",AutoImage);
+          btnImageFile= new Button("",ImageFill);
+          
+   
+  
+          btnAlfabetPuzzel.setOnAction(event ->{       
+                Stage stage = (Stage) btnAlfabetPuzzel.getScene().getWindow();
+                stage.close();
+
           foto1 = new ImageView("img/AlfabetichepuzzelImage.png");
           foto2 = new ImageView("img/LandenspelImage.png");
           foto3 = new ImageView("img/HusselPuzzleImage.jpg");
@@ -65,6 +107,7 @@ public class MainScreen
                   System.out.println("Test");
                     Stage stage = (Stage) b1.getScene().getWindow();
                     stage.close();
+
                 
                     GridPane root = new GridPane();
                     Stage dialog = new Stage();
@@ -82,10 +125,15 @@ public class MainScreen
                   System.out.println("Yeet");
               }
                 
+
+                new Puzzel(root); 
+                dialog.setScene(scene);
+                dialog.show();
+        
           });
           
-          b2.setOnAction(event ->{
-                Stage stage = (Stage) b2.getScene().getWindow();
+          btnLandenPuzzel.setOnAction(event ->{
+                Stage stage = (Stage) btnLandenPuzzel.getScene().getWindow();
                 stage.close();
                 
                 GridPane root = new GridPane();
@@ -100,8 +148,8 @@ public class MainScreen
                 dialog.show();
           });
           
-          b3.setOnAction(event ->{
-                Stage stage = (Stage) b3.getScene().getWindow();
+          btnHusselPuzzel.setOnAction(event ->{
+                Stage stage = (Stage) btnHusselPuzzel.getScene().getWindow();
                 stage.close();
                 
                 GridPane root = new GridPane();
@@ -110,14 +158,20 @@ public class MainScreen
                 dialog.setTitle("Verwissel de letters tot dat je het goede woord hebt");
                 dialog.initOwner(primaryStage);
                 Scene scene = new Scene(root, 575, 200);
-                
-                new GUI(root); 
+
+                new GUI(root);
                 dialog.setScene(scene);
                 dialog.show();
+                
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Fout");
+                alert.setHeaderText("Helaas");
+                alert.setContentText("Je hebt het antwoord niet correct");
+                alert.showAndWait();
           });
           
-          b4.setOnAction(event ->{
-                Stage stage = (Stage) b4.getScene().getWindow();
+          btnKleurenPuzzel.setOnAction(event ->{
+                Stage stage = (Stage) btnKleurenPuzzel.getScene().getWindow();
                 stage.close();
                 
                 GridPane root = new GridPane();
@@ -132,8 +186,8 @@ public class MainScreen
                 dialog.show();
           });
           
-          b5.setOnAction(event ->{
-                Stage stage = (Stage) b5.getScene().getWindow();
+          btnRebusPuzzel.setOnAction(event ->{
+                Stage stage = (Stage) btnRebusPuzzel.getScene().getWindow();
                 stage.close();
                 
                 GridPane root = new GridPane();
@@ -149,8 +203,8 @@ public class MainScreen
                 dialog.show();
           });
           
-          b6.setOnAction(event ->{
-                Stage stage = (Stage) b6.getScene().getWindow();
+          btnSudokuPuzzel.setOnAction(event ->{
+                Stage stage = (Stage) btnSudokuPuzzel.getScene().getWindow();
                 stage.close();
                 
                 GridPane root = new GridPane();
@@ -165,8 +219,8 @@ public class MainScreen
                 dialog.show();
           });
           
-          b7.setOnAction(event ->{
-              Stage stages = (Stage) b7.getScene().getWindow();
+          btnZeeSlagGame.setOnAction(event ->{
+              Stage stages = (Stage) btnZeeSlagGame.getScene().getWindow();
               stages.close();
               
               try 
@@ -183,16 +237,27 @@ public class MainScreen
                  }
           });
           
+
+          btnAutoPuzzel.setOnAction(event ->{
+              try {
+			Runtime runTime = Runtime.getRuntime();
+			Process process = runTime.exec("src\\ExeFiles\\CarChallenge.exe");
+		} catch (IOException e) {
+
           b8.setOnAction(event ->
           {
                try {
 			Runtime runTime = Runtime.getRuntime();
 			Process process = runTime.exec("src\\ExeFiles\\CarChallenge.exe");
 		} catch (Exception e) {
+
 			e.printStackTrace();
 		}
           });
           
+
+          btnImageFile.setOnAction(event ->{
+
           b9.setOnAction(event ->
           {
               try {
@@ -205,18 +270,15 @@ public class MainScreen
           
           
           
-          p.add(b1,0,0);
-          p.add(b2,0,1);
-          p.add(b3,0,2);
-          p.add(b4,1,0);
-          p.add(b5,1,1);
-          p.add(b6,1,2);
-          p.add(b7,2,0);
-          p.add(b8,2,1);
-          p.add(b9,2,2);
+          p.add(btnAlfabetPuzzel,0,0);
+          p.add(btnLandenPuzzel,0,1);
+          p.add(btnHusselPuzzel,0,2);
+          p.add(btnKleurenPuzzel,1,0);
+          p.add(btnRebusPuzzel,1,1);
+          p.add(btnSudokuPuzzel,1,2);
+          p.add(btnZeeSlagGame,2,0);
+          p.add(btnAutoPuzzel,2,1);
+          p.add(btnImageFile,2,2);
           
-          
-          
-    }    
- 
+    }     
 }
