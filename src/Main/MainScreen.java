@@ -25,6 +25,10 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 
+import javafx.scene.layout.GridPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+
 /**
  *
  * @author jiand
@@ -33,7 +37,11 @@ public class MainScreen
 {
 
     private final ImageView AlfabetichepuzzelImage,LandenspelImage,HusselPuzzleImage,KleurenPuzzleImage,RebusImage,SudokuImage,ZeelslagImage,AutoImage,ImageFill;
+
     private final Button btnAlfabetPuzzel,btnLandenPuzzel,btnHusselPuzzel,btnKleurenPuzzel,btnRebusPuzzel,btnSudokuPuzzel,btnZeeSlagGame,btnAutoPuzzel,btnCoordGame;
+
+
+
     Stage primaryStage,stage; 
   
     
@@ -47,6 +55,7 @@ public class MainScreen
           SudokuImage = new ImageView("img/SudokuImage.png");
           ZeelslagImage = new ImageView("img/ZeelslagImage.png");
           AutoImage = new ImageView("img/AutoImage.png");
+
           ImageFill = new ImageView("img/landkaart.jpg");
           
           
@@ -60,9 +69,7 @@ public class MainScreen
           btnAutoPuzzel = new Button("",AutoImage);
           btnCoordGame= new Button("",ImageFill);
           
-          
-          btnCoordGame.prefHeight(128);
-          btnCoordGame.prefWidth(128);
+
                     
           btnAlfabetPuzzel.setOnAction(event ->
           {            
@@ -80,6 +87,16 @@ public class MainScreen
                     new Puzzel(root); 
                     dialog.setScene(scene);
                     dialog.show();
+
+     
+                  System.out.println("Yeet");
+     
+                
+
+                new Puzzel(root); 
+                dialog.setScene(scene);
+                dialog.show();
+
         
           });
           
@@ -193,13 +210,15 @@ public class MainScreen
                 }
 
           });
+
           btnCoordGame.setOnAction(event ->
           {
               try {
-			Runtime runTime = Runtime.getRuntime();
-			Process process = runTime.exec("src\\ExeFiles\\cordGame.exe");
-		} catch (Exception e) {
-			e.printStackTrace();
+			            Runtime runTime = Runtime.getRuntime();
+			            Process process = runTime.exec("src\\ExeFiles\\cordGame.exe");
+		}           
+            catch (IOException e) {
+			      e.printStackTrace();
 		}
           });
           
@@ -215,5 +234,11 @@ public class MainScreen
           p.add(btnAutoPuzzel,2,1);
           p.add(btnCoordGame,2,2);
           
+          Alert startAlert = new Alert(Alert.AlertType.WARNING);
+         startAlert.setTitle("Welkom");
+         startAlert.setHeaderText("Onthoud alle codes op!!");
+         startAlert.setContentText("Je hebt ze later nodig");
+         startAlert.showAndWait();
     }     
 }
+

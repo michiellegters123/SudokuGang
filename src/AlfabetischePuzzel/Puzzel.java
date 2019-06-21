@@ -25,6 +25,7 @@ import javafx.stage.Stage;
  */
 public class Puzzel
 {
+    public boolean bool1 = false;
     private final Label Woord;
     private final Button b1;
     private final VBox v1; 
@@ -32,6 +33,17 @@ public class Puzzel
     String antwoord = "reddingsboot";
     Stage primaryStage;
 
+    public boolean getBool()
+    {
+        return this.bool1;
+    }
+    
+    public void setBool(boolean bool)
+    {
+        this.bool1 = bool;
+    }
+    
+    
     public Puzzel(GridPane p)
     {
         Woord = new Label("      a18b5c4d4e9f14g7h19i2j15k15l20m");
