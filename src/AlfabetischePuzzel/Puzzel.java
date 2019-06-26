@@ -71,7 +71,7 @@ public class Puzzel
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Correct");
                 alert.setHeaderText("Gefeliciteerd");
-                alert.setContentText("De sleutel is: krijg ****");
+                alert.setContentText("De code van deze puzzel is: reddingsboot");
                 alert.showAndWait();
                 
                 Stage stage = (Stage) b1.getScene().getWindow();

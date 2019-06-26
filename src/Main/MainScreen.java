@@ -168,7 +168,7 @@ public class MainScreen
                 GridPane root = new GridPane();
                 Stage dialog = new Stage();
                 dialog.initModality(Modality.APPLICATION_MODAL);
-                dialog.setTitle("Los de soduko op en vul de code hier in");
+                dialog.setTitle("Los de sudoku op en vul de code hier in");
                 dialog.initOwner(primaryStage);
                 Scene scene = new Scene(root, 500, 250);
                 
