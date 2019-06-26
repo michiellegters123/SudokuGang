@@ -11,7 +11,10 @@ import Game.InterFace;
 import Kleurenpuzzel.GUI2;
 import Rebus.Rebus;
 import Sudoku.GUI3;
+import java.awt.Desktop;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -26,6 +29,7 @@ import javafx.stage.Stage;
 
 
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -36,9 +40,9 @@ import javafx.stage.Stage;
 public class MainScreen
 {
 
-    private final ImageView AlfabetichepuzzelImage,LandenspelImage,HusselPuzzleImage,KleurenPuzzleImage,RebusImage,SudokuImage,ZeelslagImage,AutoImage,ImageFill;
+    private final ImageView AlfabetichepuzzelImage,LandenspelImage,HusselPuzzleImage,KleurenPuzzleImage,RebusImage,SudokuImage,ZeelslagImage,AutoImage,ImageFill, WebsiteImage;
 
-    private final Button btnAlfabetPuzzel,btnLandenPuzzel,btnHusselPuzzel,btnKleurenPuzzel,btnRebusPuzzel,btnSudokuPuzzel,btnZeeSlagGame,btnAutoPuzzel,btnCoordGame;
+    private final Button btnAlfabetPuzzel,btnLandenPuzzel,btnHusselPuzzel,btnKleurenPuzzel,btnRebusPuzzel,btnSudokuPuzzel,btnZeeSlagGame,btnAutoPuzzel,btnCoordGame, btnWebsite;
 
 
 
@@ -55,10 +59,9 @@ public class MainScreen
           SudokuImage = new ImageView("img/SudokuImage.png");
           ZeelslagImage = new ImageView("img/ZeelslagImage.png");
           AutoImage = new ImageView("img/AutoImage.png");
-
           ImageFill = new ImageView("img/landkaart.jpg");
-          
-          
+          WebsiteImage = new ImageView("img/website.png");
+                   
           btnAlfabetPuzzel = new Button("",AlfabetichepuzzelImage);
           btnLandenPuzzel = new Button("",LandenspelImage);
           btnHusselPuzzel = new Button("",HusselPuzzleImage);
@@ -68,8 +71,11 @@ public class MainScreen
           btnZeeSlagGame = new Button("",ZeelslagImage);
           btnAutoPuzzel = new Button("",AutoImage);
           btnCoordGame= new Button("",ImageFill);
+          btnWebsite = new Button("",WebsiteImage);
           
-
+          GridPane.setColumnSpan(btnWebsite, 3);          
+          btnWebsite.setPrefSize(445, 128);
+          btnWebsite.setTextFill(Color.RED);
                     
           btnAlfabetPuzzel.setOnAction(event ->
           {            
@@ -87,16 +93,6 @@ public class MainScreen
                     new Puzzel(root); 
                     dialog.setScene(scene);
                     dialog.show();
-
-     
-                  System.out.println("Yeet");
-     
-                
-
-                new Puzzel(root); 
-                dialog.setScene(scene);
-                dialog.show();
-
         
           });
           
@@ -201,7 +197,8 @@ public class MainScreen
           
 
           btnAutoPuzzel.setOnAction(event ->{
-              try {
+              try 
+              {
 			Runtime runTime = Runtime.getRuntime();
 			Process process = runTime.exec("src\\ExeFiles\\CarChallenge.exe");
 		} catch (IOException e) 
@@ -210,18 +207,28 @@ public class MainScreen
                 }
 
           });
-
           btnCoordGame.setOnAction(event ->
           {
-              try {
-			            Runtime runTime = Runtime.getRuntime();
-			            Process process = runTime.exec("src\\ExeFiles\\cordGame.exe");
-		}           
-            catch (IOException e) {
-			      e.printStackTrace();
+              try 
+              {
+			Runtime runTime = Runtime.getRuntime();
+			Process process = runTime.exec("src\\ExeFiles\\cordGame.exe");
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
           });
           
+          btnWebsite.setOnAction(event ->{
+              Desktop d = Desktop.getDesktop();
+              try 
+              {
+                  d.browse(new URI("https://mlegters.gc-webhosting.nl/wp/"));
+              } 
+              catch (IOException | URISyntaxException e2) 
+              {
+                  e2.printStackTrace();
+              } 
+          });
           
           
           p.add(btnAlfabetPuzzel,0,0);
@@ -233,6 +240,7 @@ public class MainScreen
           p.add(btnZeeSlagGame,2,0);
           p.add(btnAutoPuzzel,2,1);
           p.add(btnCoordGame,2,2);
+          p.add(btnWebsite,0,3);
           
           Alert startAlert = new Alert(Alert.AlertType.WARNING);
          startAlert.setTitle("Welkom");
