@@ -7,19 +7,36 @@ package Main;
 
 import AlfabetischePuzzel.Puzzel;
 import Game.InterFace;
-import HusselPuzzel.GUI;
 import Kleurenpuzzel.GUI2;
 import Rebus.Rebus;
 import Sudoku.GUI3;
 import java.io.IOException;
+import HPuzzel.GUI;
+import java.awt.Desktop;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.LabelBuilder;
 import javafx.scene.image.ImageView;
 
+
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.HBoxBuilder;
+import javafx.scene.paint.Color;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -28,27 +45,28 @@ import javafx.stage.Stage;
  *
  * @author jiand
  */
-public class MainScreen extends Klik
+public class MainScreen
 {
-    private final ImageView AlfabetichepuzzelImage,LandenspelImage,HusselPuzzleImage,KleurenPuzzleImage,RebusImage,SudokuImage,ZeelslagImage,AutoImage,ImageFill;
-    private final Button btnAlfabetPuzzel,btnLandenPuzzel,btnHusselPuzzel,btnKleurenPuzzel,btnRebusPuzzel,btnSudokuPuzzel,btnZeeSlagGame,btnAutoPuzzel,btnImageFile;
-    private int kliks = getTotaalgeklikt();
+
+    private final ImageView AlfabetichepuzzelImage,LandenspelImage,HusselPuzzleImage,KleurenPuzzleImage,RebusImage,SudokuImage,ZeelslagImage,AutoImage,ImageFill,WebsiteImage;
+    private final Button btnAlfabetPuzzel,btnLandenPuzzel,btnHusselPuzzel,btnKleurenPuzzel,btnRebusPuzzel,btnSudokuPuzzel,btnZeeSlagGame,btnAutoPuzzel,btnCoordGame,btnWebsite;
     Stage primaryStage,stage; 
+
   
     
     public MainScreen(GridPane p)
     {
           AlfabetichepuzzelImage = new ImageView("img/AlfabetichepuzzelImage.png");
           LandenspelImage = new ImageView("img/LandenspelImage.png");
-          HusselPuzzleImage = new ImageView("img/HusselPuzzleImage.jpg");
+          HusselPuzzleImage = new ImageView("img/HPuzzel.jpg");
           KleurenPuzzleImage = new ImageView("img/KleurenPuzzleImage.PNG");
           RebusImage = new ImageView("img/Rebus.jpg");
           SudokuImage = new ImageView("img/SudokuImage.png");
           ZeelslagImage = new ImageView("img/ZeelslagImage.png");
           AutoImage = new ImageView("img/AutoImage.png");
-          ImageFill = new ImageView("img/ImageFill.png");
-          
-          
+          ImageFill = new ImageView("img/landkaart.jpg");
+          WebsiteImage = new ImageView("img/website.png");
+                   
           btnAlfabetPuzzel = new Button("",AlfabetichepuzzelImage);
           btnLandenPuzzel = new Button("",LandenspelImage);
           btnHusselPuzzel = new Button("",HusselPuzzleImage);
@@ -57,36 +75,30 @@ public class MainScreen extends Klik
           btnSudokuPuzzel = new Button("",SudokuImage);
           btnZeeSlagGame = new Button("",ZeelslagImage);
           btnAutoPuzzel = new Button("",AutoImage);
-          btnImageFile= new Button("",ImageFill);
+          btnCoordGame= new Button("",ImageFill);
+          btnWebsite = new Button("",WebsiteImage);
           
-   
-  
-          btnAlfabetPuzzel.setOnAction(event ->{
-              if(kliks == 0)
-              {
-                Stage stage = (Stage) btnAlfabetPuzzel.getScene().getWindow();
-                stage.close();
+          GridPane.setColumnSpan(btnWebsite, 3);          
+          btnWebsite.setPrefSize(445, 128);
+          btnWebsite.setTextFill(Color.RED);
+                    
+          btnAlfabetPuzzel.setOnAction(event ->
+          {            
+                    Stage stage = (Stage) btnAlfabetPuzzel.getScene().getWindow();
+                    stage.close();
+
                 
-                GridPane root = new GridPane();
-                Stage dialog = new Stage();
-                dialog.initModality(Modality.APPLICATION_MODAL);
-                dialog.setTitle("Los deze Alfabetische puzzel op om de code te krijgen");
-                dialog.initOwner(primaryStage);
-                Scene scene = new Scene(root, 600, 300);
+                    GridPane root = new GridPane();
+                    Stage dialog = new Stage();
+                    dialog.initModality(Modality.APPLICATION_MODAL);
+                    dialog.setTitle("Los deze Alfabetische puzzel op om de code te krijgen");
+                    dialog.initOwner(primaryStage);
+                    Scene scene = new Scene(root, 600, 300);
                 
-                new Puzzel(root); 
-                dialog.setScene(scene);
-                dialog.show();
-              
-              }
-              else if(getTotaalgeklikt() == 1)
-              {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Fout");
-                alert.setHeaderText("Helaas");
-                alert.setContentText("Je hebt het antwoord niet correct");
-                alert.showAndWait();
-              }
+                    new Puzzel(root); 
+                    dialog.setScene(scene);
+                    dialog.show();
+        
           });
           
           btnLandenPuzzel.setOnAction(event ->{
@@ -119,12 +131,6 @@ public class MainScreen extends Klik
                 new GUI(root);
                 dialog.setScene(scene);
                 dialog.show();
-                
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Fout");
-                alert.setHeaderText("Helaas");
-                alert.setContentText("Je hebt het antwoord niet correct");
-                alert.showAndWait();
           });
           
           btnKleurenPuzzel.setOnAction(event ->{
@@ -194,18 +200,37 @@ public class MainScreen extends Klik
                  }
           });
           
+
           btnAutoPuzzel.setOnAction(event ->{
               try {
 			Runtime runTime = Runtime.getRuntime();
 			Process process = runTime.exec("src\\ExeFiles\\CarChallenge.exe");
-		} catch (IOException e) {
+		} catch (IOException e) 
+                {
+                    e.printStackTrace();
+                }
+
+          });
+          btnCoordGame.setOnAction(event ->
+          {
+              try {
+			Runtime runTime = Runtime.getRuntime();
+			Process process = runTime.exec("src\\ExeFiles\\cordGame.exe");
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
           });
           
-          btnImageFile.setOnAction(event ->{
+          btnWebsite.setOnAction(event ->{
+              Desktop d = Desktop.getDesktop();
+              try 
+              {
+                  d.browse(new URI("https://mlegters.gc-webhosting.nl/wp/"));
+              } catch (IOException | URISyntaxException e2) 
+              {
+                  e2.printStackTrace();
+              } 
           });
-          
           
           
           p.add(btnAlfabetPuzzel,0,0);
@@ -216,7 +241,8 @@ public class MainScreen extends Klik
           p.add(btnSudokuPuzzel,1,2);
           p.add(btnZeeSlagGame,2,0);
           p.add(btnAutoPuzzel,2,1);
-          p.add(btnImageFile,2,2);
+          p.add(btnCoordGame,2,2);
+          p.add(btnWebsite,0,3);
           
     }     
 }
