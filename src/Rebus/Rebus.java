@@ -11,6 +11,7 @@ package Rebus;
 
 import Main.MainScreen;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -154,7 +155,10 @@ public class Rebus
             
             if(txtWW.getText().equals(antwoord))
             {
-                 Stage stage = (Stage) txtWW.getScene().getWindow();
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setHeaderText("de code van deze puzzel is kapitein");
+                alert.showAndWait();
+                Stage stage = (Stage) txtWW.getScene().getWindow();
                 stage.close();
                 
                 GridPane root = new GridPane();

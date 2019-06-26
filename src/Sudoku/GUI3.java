@@ -33,7 +33,7 @@ public class GUI3
 
     public GUI3(GridPane p)
     {
-        Woord = new Label("         Voor hier de laatste code" + "\r\n" + "  in om weg te komen van het schip");
+        Woord = new Label(" Voer hier de code in");
         klik = new Button("Voer code in");
         v1 = new VBox(); 
         t1 = new TextField();

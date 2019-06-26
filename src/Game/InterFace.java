@@ -62,7 +62,10 @@ public class InterFace
         enter.setOnAction(event->
         {   
             if(uitkomst.getText().equals("kombuis"))
-            {                
+            {           
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setHeaderText("de code van deze puzzel is kombuis");
+                alert.showAndWait();
                 Stage stage = (Stage) enter.getScene().getWindow();
                 stage.close();
                 

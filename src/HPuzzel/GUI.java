@@ -91,8 +91,8 @@ public class GUI
            veld_r.getText().equals("r") && veld_k2.getText().equals("k") && veld_e2.getText().equals("e") && veld_t.getText().equals("t") && veld_t2.getText().equals("t") &&
            veld_i.getText().equals("i") && veld_n2.getText().equals("n") && veld_g.getText().equals("g"))
         {
-            Alert alert = new Alert(Alert.AlertType.NONE,"code:",ButtonType.FINISH);
-            alert.show();
+            Alert alert = new Alert(Alert.AlertType.NONE,"code: ankerketting",ButtonType.FINISH);
+            alert.showAndWait();
             
             Stage stage = (Stage) knop.getScene().getWindow();
                 stage.close();

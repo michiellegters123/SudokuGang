@@ -383,7 +383,7 @@ public class BattleshipController implements Initializable {
                         Alert winAlert = new Alert(AlertType.INFORMATION);
                         winAlert.setTitle("VICTORY");
                         winAlert.setHeaderText(null);
-                        winAlert.setContentText("Jij wint!\nBedankt voor het spelen!");
+                        winAlert.setContentText("Jij wint!\nBedankt voor het spelen!\nde code van deze puzzel is zeeslag");
                         winAlert.showAndWait(); 
                         startButton.setVisible(false);
                         terugbutton.setVisible(true);
@@ -415,7 +415,7 @@ public class BattleshipController implements Initializable {
                             Alert loseAlert = new Alert(AlertType.INFORMATION);
                             loseAlert.setTitle("DEFEAT");
                             loseAlert.setHeaderText(null);
-                            loseAlert.setContentText("Jij hebt verloren.\nBedankt voor het spelen!");
+                            loseAlert.setContentText("Je hebt verloren.\nBedankt voor het spelen!");
                             loseAlert.showAndWait();
                             //reset();
                             
@@ -523,7 +523,7 @@ public class BattleshipController implements Initializable {
         Alert aboutAlert = new Alert(AlertType.INFORMATION);
         aboutAlert.setTitle("Informatie");
         aboutAlert.setHeaderText("Bericht");
-        aboutAlert.setContentText("Om het wactwoord te krijgen moet je deze game Xkeer winnen!" + "/r/n" + "Je begint met een score van 5000 punten.");
+        aboutAlert.setContentText("Om het wactwoord te krijgen moet je deze game Xkeer winnen!" + "\r\n" + "Je begint met een score van 90 seconde.");
         aboutAlert.showAndWait();
     }
 
